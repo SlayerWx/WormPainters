@@ -17,13 +17,16 @@ public:
 	void Input();
 	void Update();
 	void Draw();
+	Vector2 moveToDirection();
 
 private:
 	static const int maxBody = 20;
 	Object* body[maxBody];
 	Direction myDirection;
 	float distanceToMove;
-	void SetNewMoveInBody(float x, float y);
+	void SetNewMoveInBody();
+	static float timer;
+	static const float timerMX;
 };
 }
 #endif

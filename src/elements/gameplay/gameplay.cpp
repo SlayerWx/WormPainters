@@ -19,10 +19,11 @@ void Gameplay::Restart()
 }
 void Gameplay::Input()
 {
-	
+	p->Input();
 }
 void Gameplay::Update()
 {
+	p->Update();
 }
 void Gameplay::Draw()
 {

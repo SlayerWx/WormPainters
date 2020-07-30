@@ -1,9 +1,11 @@
 #include "player.h"
 namespace worm_painters
 {
+const float Player::timerMX = 1.0f;
+float Player::timer = 0.0f;
 Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition)
 {
-	
+	timer = 0.0f;
 	myDirection = start;
 	distanceToMove = newDistanceToMove;
 	body[head] = new Object(startPosition.x, startPosition.y,
@@ -41,33 +43,39 @@ Player::~Player()
 }
 void Player::Input()//asAS
 {
-	if (IsKeyDown(KEY_RIGHT) && myDirection != right)
+	if (IsKeyDown(KEY_RIGHT) && myDirection != left)
 	{
 		myDirection = right;
-		SetNewMoveInBody(distanceToMove,0);
 	}
-	else if (IsKeyDown(KEY_DOWN) && myDirection != down)
+	else if (IsKeyDown(KEY_DOWN) && myDirection != up)
 	{
 		myDirection = down;
-		SetNewMoveInBody(0, distanceToMove);
 	}
-	else if (IsKeyDown(KEY_LEFT) && myDirection != left)
+	else if (IsKeyDown(KEY_LEFT) && myDirection != right)
 	{
 		myDirection = left;
-		SetNewMoveInBody(-distanceToMove,0);
 	}
-	else if (IsKeyDown(KEY_UP) && myDirection != up)
+	else if (IsKeyDown(KEY_UP) && myDirection != down)
 	{
 		myDirection = up;
-		SetNewMoveInBody(0,-distanceToMove);
 	}
 }
 void Player::Update()
 {
+	if (timer > timerMX)
+	{
+		for (int i = 0; i < maxBody; i++)
+		{
+			body[i]->Update(timerMX);
+		}
+		SetNewMoveInBody();
+		timer = 0;
+	}
 	for (int i = 0; i < maxBody; i++)
 	{
-		body[i]->Update(0.0f);
+		body[i]->Update(timer);
 	}
+	timer += 0.02f;
 }
 void Player::Draw()
 {
@@ -76,9 +84,31 @@ void Player::Draw()
 		body[i]->Draw();
 	}
 }
-void Player::SetNewMoveInBody(float x, float y)//asAS
+Vector2 Player::moveToDirection()
 {
-	body[head]->SetNewPos(body[head]->GetX() + x, body[head]->GetY() + y);
+	Vector2 ux = {0,0};
+	if (myDirection == left)
+	{
+		ux = {-distanceToMove,0};
+	}
+	else if (myDirection == up)
+	{
+		ux = { 0,-distanceToMove };
+	}
+	else if (myDirection == right)
+	{
+		ux = { distanceToMove,0 };
+	}
+	else if (myDirection == down)
+	{
+		ux = { 0,distanceToMove };
+	}
+	return ux;
+}
+void Player::SetNewMoveInBody()//asAS
+{
+	Vector2 ux = moveToDirection();
+	body[head]->SetNewPos(body[head]->GetX() + ux.x, body[head]->GetY() + ux.y);
 	for (int i = 1; i < maxBody; i++)
 	{
 		body[i]->SetNewPos(body[i-1]->GetX(),body[i-1]->GetY());
