@@ -140,11 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\elements\gameplay\gameplay.cpp" />
+    <ClCompile Include="..\src\elements\map\map.cpp" />
+    <ClCompile Include="..\src\elements\map\pressure_plate.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\worm_painters\worm_painters.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\elements\gameplay\gameplay.h" />
+    <ClInclude Include="..\src\elements\map\map.h" />
+    <ClInclude Include="..\src\elements\map\pressure_plate.h" />
     <ClInclude Include="..\src\worm_painters\worm_painters.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

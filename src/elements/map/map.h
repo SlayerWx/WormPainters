@@ -10,7 +10,9 @@ public:
 	~Map();
 
 private:
-
+	static const int top = 100;
+	int rowPlates = 10;
+	int columnPlates = 10;
 };
 }
 #endif

@@ -16,6 +16,9 @@
     <Filter Include="src\elements\gameplay">
       <UniqueIdentifier>{a52cb11f-0728-422e-a7a0-526910726357}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\elements\map">
+      <UniqueIdentifier>{c1e0b06c-e4cb-4106-83ea-ded4862d39b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -27,6 +30,12 @@
     <ClCompile Include="..\src\elements\gameplay\gameplay.cpp">
       <Filter>src\elements\gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\elements\map\map.cpp">
+      <Filter>src\elements\map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\elements\map\pressure_plate.cpp">
+      <Filter>src\objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\worm_painters\worm_painters.h">
@@ -34,6 +43,12 @@
     </ClInclude>
     <ClInclude Include="..\src\elements\gameplay\gameplay.h">
       <Filter>src\elements\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\elements\map\map.h">
+      <Filter>src\elements\map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\elements\map\pressure_plate.h">
+      <Filter>src\objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
