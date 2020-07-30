@@ -17,6 +17,6 @@ void PressurePlate::draw()
 	DrawRectangle(static_cast<int>(body.x), 
 				  static_cast<int>(body.y), 
 				  static_cast<int>(body.width), 
-				  static_cast<int>(body.height), GREEN);
+				  static_cast<int>(body.height), WHITE);
 }
 }

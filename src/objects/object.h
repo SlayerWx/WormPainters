@@ -3,13 +3,15 @@
 #include "raylib.h"
 namespace worm_painters
 {
-enum ObstacleID
+enum BodyPart
 {
-	
+	head,next
 };
 class Object
 {
 public:
+	Object(float x, float y, float width, float height,Object* previous = nullptr);
+	~Object();
 	void SetX(float newX);
 	float GetX();
 	void SetY(float newY);
@@ -25,8 +27,12 @@ public:
 	Color GetColor();
 	void Draw();
 protected:
-	Color myColor = WHITE;
+	Color myColor = BLUE;
 	Rectangle body;
+	Object* previousBody;
+	BodyPart im;
+	Vector2 startPosition;
+	Vector2 endPosition;
 };
 }
 #endif 

@@ -2,9 +2,30 @@
 #include "raylib.h"
 namespace worm_painters
 {
-void Object::SetX(float x)
+Object::Object(float x,float y,float width, float height,Object* previous = nullptr)
 {
 	body.x = x;
+	body.y = y;
+	body.width = width;
+	body.height = height;
+	previousBody = previous;
+	if (previous == nullptr)
+	{
+		im = head;
+	}
+	else
+	{
+		im = next;
+	}
+	startPosition = {0.0f,0.0f};
+	endPosition = {0.0f,0.0f};
+}
+Object::~Object()
+{
+}
+void Object::SetX(float x)
+{
+body.x = x;
 }
 float Object::GetX()
 {
