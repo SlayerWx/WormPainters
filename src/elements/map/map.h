@@ -12,12 +12,14 @@ public:
 	Vector2 GetWidthHeightPlate();
 	void draw();
 	void CheckCollision(Rectangle player,Color playerColor);
+	int GetTop();
 private:
 	static const int top = 100;
-	static const int rowPlatesMax = 10;
-	static const int columnPlatesMax = 10;
+	static const int rowPlatesMax = 20;
+	static const int columnPlatesMax = 20;
 	PressurePlate* plates[rowPlatesMax][columnPlatesMax];
 	Texture2D platesBakground;
+	Texture2D platesSplash;
 };
 }
 #endif

@@ -15,9 +15,10 @@ namespace worm_painters
 		void Update();
 		void Draw();
 		Map* map;
-		Player* p;
+		static const int maxPlayers = 4;
+		Player* p[maxPlayers];
 	private:
-		float timeGameplayScale = 0.1f;
+		float timeGameplayScale = 0.5f;
 		void CheckCollision();
 	};
 }

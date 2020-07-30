@@ -4,16 +4,20 @@
 using namespace std;
 namespace worm_painters
 {
-PressurePlate::PressurePlate(int x,int y,int width,int height,Texture2D texture)
+PressurePlate::PressurePlate(int x,int y,int width,int height,Texture2D texture,Texture2D splash)
 {
+	isSplashed = false;
 	body.x = static_cast<float>(x);
 	body.y = static_cast<float>(y);
 	body.width = static_cast<float>(width);
 	body.height = static_cast<float>(height);
 	myColor = WHITE;
 	mytexture = texture;
+	mySplashTexture = splash;
 	mytexture.height = static_cast<int>(body.height);
 	mytexture.width = static_cast<int>(body.width);
+	mySplashTexture.height = static_cast<int>(body.height);
+	mySplashTexture.width = static_cast<int>(body.width);
 	
 }
 PressurePlate::~PressurePlate()
@@ -32,6 +36,10 @@ void PressurePlate::draw()
 				  static_cast<int>(body.height), myColor);
 #endif
 	DrawTexture(mytexture, static_cast<int>(body.x), static_cast<int>(body.y),WHITE);
+	if (isSplashed)
+	{
+		DrawTexture(mySplashTexture, static_cast<int>(body.x), static_cast<int>(body.y),myColor);
+	}
 }
 Rectangle PressurePlate::GetBody()
 {
@@ -40,5 +48,9 @@ Rectangle PressurePlate::GetBody()
 void PressurePlate::SetColor(Color color)
 {
 	myColor = color;
+}
+void PressurePlate::SetSplashed(bool w)
+{
+	isSplashed = w;
 }
 }

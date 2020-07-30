@@ -5,35 +5,13 @@ const float Player::timerMX = 1.0f;
 float Player::timer = 0.0f;
 Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color)
 {
+	imActive = false;
+	canChange = true;
 	myColor = color;
 	timer = 0.0f;
 	myDirection = start;
 	distanceToMove = newDistanceToMove;
-	body[head] = new Object(startPosition.x + (newDistanceToMove/4), startPosition.y,
-		newDistanceToMove/2 ,newDistanceToMove/2,myColor);
-	for (int i = 1; i < maxBody; i++)
-	{
-		if (myDirection == right)
-		{
-			body[i] = new Object(body[i-1]->GetX() - distanceToMove, body[i-1]->GetY(),
-				newDistanceToMove/2, newDistanceToMove/2,myColor);
-		}
-		else if (myDirection == down)
-		{
-			body[i] = new Object(body[i - 1]->GetX(), body[i - 1]->GetY() - distanceToMove,
-				newDistanceToMove/2, newDistanceToMove/2,myColor);
-		}
-		else if (myDirection == left)
-		{
-			body[i] = new Object(body[i - 1]->GetX() + distanceToMove, body[i - 1]->GetY(),
-				newDistanceToMove/2, newDistanceToMove/2,myColor);
-		}
-		else if (myDirection == up)
-		{
-			body[i] = new Object(body[i - 1]->GetX(), body[i - 1]->GetY() + distanceToMove,
-				newDistanceToMove/2, newDistanceToMove/2,myColor);
-		}
-	}
+	SetPositionAndDirection(startPosition, start);
 }
 Player::~Player()
 {
@@ -44,7 +22,7 @@ Player::~Player()
 }
 void Player::Input(float timeScale)//asAS
 {
-	if (timeScale != 0.0f)
+	if (timeScale != 0.0f && canChange)
 	{
 		if (IsKeyDown(KEY_RIGHT) && myDirection != left)
 		{
@@ -62,6 +40,7 @@ void Player::Input(float timeScale)//asAS
 		{
 			myDirection = up;
 		}
+		canChange = false;
 	}
 }
 void Player::Update(float TimeScale)
@@ -74,6 +53,7 @@ void Player::Update(float TimeScale)
 			}
 			SetNewMoveInBody();
 			timer = 0;
+			canChange = true;
 		}
 		for (int i = 0; i < maxBody; i++)
 		{
@@ -116,6 +96,47 @@ Rectangle Player::GetHead()
 Color Player::GetColor()
 {
 	return myColor;
+}
+void Player::SetActive(bool active)
+{
+	imActive = active;
+}
+void Player::SetColor(Color newColor)
+{
+	myColor = newColor;
+	for (int i = 0; i < maxBody; i++)
+	{
+		body[i]->SetColor(newColor);
+	}
+}
+void Player::SetPositionAndDirection(Vector2 pos, Direction dir)
+{
+	myDirection = dir;
+	body[head] = new Object(pos.x + (distanceToMove / 4), pos.y + (distanceToMove / 4),
+		distanceToMove / 2, distanceToMove / 2, myColor);
+	for (int i = 1; i < maxBody; i++)
+	{
+		if (myDirection == right)
+		{
+			body[i] = new Object(body[i - 1]->GetX() - distanceToMove, body[i - 1]->GetY(),
+				distanceToMove / 2, distanceToMove / 2, myColor);
+		}
+		else if (myDirection == down)
+		{
+			body[i] = new Object(body[i - 1]->GetX(), body[i - 1]->GetY() - distanceToMove,
+				distanceToMove / 2, distanceToMove / 2, myColor);
+		}
+		else if (myDirection == left)
+		{
+			body[i] = new Object(body[i - 1]->GetX() + distanceToMove, body[i - 1]->GetY(),
+				distanceToMove / 2, distanceToMove / 2, myColor);
+		}
+		else if (myDirection == up)
+		{
+			body[i] = new Object(body[i - 1]->GetX(), body[i - 1]->GetY() + distanceToMove,
+				distanceToMove / 2, distanceToMove / 2, myColor);
+		}
+	}
 }
 void Player::SetNewMoveInBody()//asAS
 {

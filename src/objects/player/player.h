@@ -20,6 +20,9 @@ public:
 	Vector2 moveToDirection();
 	Rectangle GetHead();
 	Color GetColor();
+	void SetActive(bool active);
+	void SetColor(Color newColor);
+	void SetPositionAndDirection(Vector2 pos, Direction dir);
 private:
 	static const int maxBody = 20;
 	Object* body[maxBody];
@@ -30,6 +33,8 @@ private:
 	static const float timerMX;
 	float speed = 10.0f;
 	Color myColor = GRAY;
+	bool canChange;
+	bool imActive;
 };
 }
 #endif
