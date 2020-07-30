@@ -7,9 +7,11 @@ namespace worm_painters
 	{
 		InitWindow(initialWindowsSizeWidth, initialWindowSizeHeight, (title + ' ' + version).c_str());
 		currentStage = Stage_Gameplay;
+		gameplay = new Gameplay();
 	}
 	WormPainters::~WormPainters()
 	{
+		if (gameplay)delete gameplay;
 		CloseWindow();
 	}
 	void WormPainters::Play()
@@ -30,6 +32,7 @@ namespace worm_painters
 		case Stage_Menu:
 			break;
 		case Stage_Gameplay:
+			gameplay->Input();
 			break;
 		}
 	}
@@ -42,6 +45,7 @@ namespace worm_painters
 		case Stage_Menu:
 			break;
 		case Stage_Gameplay:
+			gameplay->Update();
 			break;
 
 		}
@@ -57,6 +61,7 @@ namespace worm_painters
 		case Stage_Menu:
 			break;
 		case Stage_Gameplay:
+			gameplay->Draw();
 			break;
 		}
 		EndDrawing();

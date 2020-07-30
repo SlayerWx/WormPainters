@@ -7,6 +7,15 @@
     <Filter Include="src\worm_painters">
       <UniqueIdentifier>{0156620f-aa38-48f7-8570-e632b8d304a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\elements">
+      <UniqueIdentifier>{6c530ac0-1a08-4e50-ad56-0cda5efb6423}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\objects">
+      <UniqueIdentifier>{e690840f-8db9-4c5f-9985-6ffa0e5d2ef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\elements\gameplay">
+      <UniqueIdentifier>{a52cb11f-0728-422e-a7a0-526910726357}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -15,10 +24,16 @@
     <ClCompile Include="..\src\worm_painters\worm_painters.cpp">
       <Filter>src\worm_painters</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\elements\gameplay\gameplay.cpp">
+      <Filter>src\elements\gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\worm_painters\worm_painters.h">
       <Filter>src\worm_painters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\elements\gameplay\gameplay.h">
+      <Filter>src\elements\gameplay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
