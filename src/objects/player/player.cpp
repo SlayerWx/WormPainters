@@ -3,34 +3,35 @@ namespace worm_painters
 {
 const float Player::timerMX = 1.0f;
 float Player::timer = 0.0f;
-Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition)
+Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color)
 {
+	myColor = color;
 	timer = 0.0f;
 	myDirection = start;
 	distanceToMove = newDistanceToMove;
-	body[head] = new Object(startPosition.x, startPosition.y,
-		newDistanceToMove ,newDistanceToMove);
+	body[head] = new Object(startPosition.x + (newDistanceToMove/2), startPosition.y + (newDistanceToMove/2),
+		newDistanceToMove/2 ,newDistanceToMove/2,myColor);
 	for (int i = 1; i < maxBody; i++)
 	{
 		if (myDirection == right)
 		{
 			body[i] = new Object(body[i-1]->GetX() - distanceToMove, body[i-1]->GetY(),
-				newDistanceToMove, newDistanceToMove);
+				newDistanceToMove/2, newDistanceToMove/2,myColor);
 		}
 		else if (myDirection == down)
 		{
 			body[i] = new Object(body[i - 1]->GetX(), body[i - 1]->GetY() - distanceToMove,
-				newDistanceToMove, newDistanceToMove);
+				newDistanceToMove/2, newDistanceToMove/2,myColor);
 		}
 		else if (myDirection == left)
 		{
 			body[i] = new Object(body[i - 1]->GetX() + distanceToMove, body[i - 1]->GetY(),
-				newDistanceToMove, newDistanceToMove);
+				newDistanceToMove/2, newDistanceToMove/2,myColor);
 		}
 		else if (myDirection == up)
 		{
 			body[i] = new Object(body[i - 1]->GetX(), body[i - 1]->GetY() + distanceToMove,
-				newDistanceToMove, newDistanceToMove);
+				newDistanceToMove/2, newDistanceToMove/2,myColor);
 		}
 	}
 }
@@ -41,41 +42,44 @@ Player::~Player()
 		if (body[i]) delete body[i];
 	}
 }
-void Player::Input()//asAS
+void Player::Input(float timeScale)//asAS
 {
-	if (IsKeyDown(KEY_RIGHT) && myDirection != left)
+	if (timeScale != 0.0f)
 	{
-		myDirection = right;
-	}
-	else if (IsKeyDown(KEY_DOWN) && myDirection != up)
-	{
-		myDirection = down;
-	}
-	else if (IsKeyDown(KEY_LEFT) && myDirection != right)
-	{
-		myDirection = left;
-	}
-	else if (IsKeyDown(KEY_UP) && myDirection != down)
-	{
-		myDirection = up;
+		if (IsKeyDown(KEY_RIGHT) && myDirection != left)
+		{
+			myDirection = right;
+		}
+		else if (IsKeyDown(KEY_DOWN) && myDirection != up)
+		{
+			myDirection = down;
+		}
+		else if (IsKeyDown(KEY_LEFT) && myDirection != right)
+		{
+			myDirection = left;
+		}
+		else if (IsKeyDown(KEY_UP) && myDirection != down)
+		{
+			myDirection = up;
+		}
 	}
 }
-void Player::Update()
+void Player::Update(float TimeScale)
 {
-	if (timer > timerMX)
-	{
+		if (timer > timerMX)
+		{
+			for (int i = 0; i < maxBody; i++)
+			{
+				body[i]->Update(timerMX);
+			}
+			SetNewMoveInBody();
+			timer = 0;
+		}
 		for (int i = 0; i < maxBody; i++)
 		{
-			body[i]->Update(timerMX);
+			body[i]->Update(timer);
 		}
-		SetNewMoveInBody();
-		timer = 0;
-	}
-	for (int i = 0; i < maxBody; i++)
-	{
-		body[i]->Update(timer);
-	}
-	timer += 0.02f;
+		timer += (GetFrameTime() * speed) * TimeScale;
 }
 void Player::Draw()
 {
@@ -104,6 +108,14 @@ Vector2 Player::moveToDirection()
 		ux = { 0,distanceToMove };
 	}
 	return ux;
+}
+Rectangle Player::GetHead()
+{
+	return body[head]->GetBody();
+}
+Color Player::GetColor()
+{
+	return myColor;
 }
 void Player::SetNewMoveInBody()//asAS
 {

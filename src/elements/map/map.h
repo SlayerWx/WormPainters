@@ -11,11 +11,13 @@ public:
 	~Map();
 	Vector2 GetWidthHeightPlate();
 	void draw();
+	void CheckCollision(Rectangle player,Color playerColor);
 private:
 	static const int top = 100;
-	static const int rowPlatesMax = 2;
-	static const int columnPlatesMax = 2;
+	static const int rowPlatesMax = 10;
+	static const int columnPlatesMax = 10;
 	PressurePlate* plates[rowPlatesMax][columnPlatesMax];
+	Texture2D platesBakground;
 };
 }
 #endif

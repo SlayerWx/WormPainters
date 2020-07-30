@@ -10,7 +10,7 @@ enum BodyPart
 class Object
 {
 public:
-	Object(float x, float y, float width, float height);
+	Object(float x, float y, float width, float height,Color color);
 	~Object();
 	void SetX(float newX);
 	float GetX();
@@ -31,8 +31,9 @@ public:
 	void Update(float timer);
 	void Lerp(float timer);
 	void Draw();
+	Rectangle GetBody();
 protected:
-	Color myColor = BLUE;
+	Color myColor = GRAY;
 	Rectangle body;
 	Vector2 startPosition;
 	Vector2 endPosition;

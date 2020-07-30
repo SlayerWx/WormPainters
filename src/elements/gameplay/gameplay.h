@@ -17,7 +17,8 @@ namespace worm_painters
 		Map* map;
 		Player* p;
 	private:
-		float timeGameplayScale = 1.0f;
+		float timeGameplayScale = 0.1f;
+		void CheckCollision();
 	};
 }
 #endif

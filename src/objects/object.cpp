@@ -2,7 +2,7 @@
 #include "raylib.h"
 namespace worm_painters
 {
-Object::Object(float x,float y,float width, float height)
+Object::Object(float x,float y,float width, float height,Color color)
 {
 	body.x = x;
 	body.y = y;
@@ -10,6 +10,7 @@ Object::Object(float x,float y,float width, float height)
 	body.height = height;
 	startPosition = {0.0f,0.0f};
 	endPosition = {0.0f,0.0f};
+	myColor = color;
 }
 Object::~Object()
 {
@@ -81,14 +82,6 @@ bool Object::getShow()
 }
 void Object::SetNewPos(float nextX,float nextY)
 {
-	if (nextX == 0.0f)
-	{
-		nextX = body.x;
-	}
-	if (nextY == 0.0f)
-	{
-		nextY = body.y;
-	}
 	startPosition = {body.x,body.y};
 	endPosition = {nextX,nextY};
 }
@@ -107,5 +100,9 @@ void Object::Draw()
 	DrawRectangle(static_cast<int>(body.x), static_cast<int>(body.y),
 		static_cast<int>(body.width), static_cast<int>(body.height), myColor);
 #endif
+}
+Rectangle Object::GetBody()
+{
+	return body;
 }
 }
