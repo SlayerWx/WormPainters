@@ -9,7 +9,7 @@ Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Col
 	timer = 0.0f;
 	myDirection = start;
 	distanceToMove = newDistanceToMove;
-	body[head] = new Object(startPosition.x + (newDistanceToMove/2), startPosition.y + (newDistanceToMove/2),
+	body[head] = new Object(startPosition.x + (newDistanceToMove/4), startPosition.y,
 		newDistanceToMove/2 ,newDistanceToMove/2,myColor);
 	for (int i = 1; i < maxBody; i++)
 	{

@@ -8,8 +8,8 @@ Object::Object(float x,float y,float width, float height,Color color)
 	body.y = y;
 	body.width = width;
 	body.height = height;
-	startPosition = {0.0f,0.0f};
-	endPosition = {0.0f,0.0f};
+	startPosition = {x,y};
+	endPosition = {x,y};
 	myColor = color;
 }
 Object::~Object()
