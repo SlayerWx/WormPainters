@@ -5,6 +5,7 @@ namespace worm_painters
 {
 Gameplay::Gameplay()
 {
+	map = new Map();
 }
 Gameplay::~Gameplay()
 {
@@ -20,5 +21,6 @@ void Gameplay::Update()
 }
 void Gameplay::Draw()
 {
+	map->draw();
 }
 }

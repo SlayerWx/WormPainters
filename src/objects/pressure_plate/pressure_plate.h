@@ -6,9 +6,9 @@ namespace worm_painters
 class PressurePlate
 {
 public:
-	PressurePlate(float x, float y, float width, float height);
+	PressurePlate(int x, int y, int width, int height);
 	~PressurePlate();
-
+	void draw();
 private:
 	Rectangle body;
 };
