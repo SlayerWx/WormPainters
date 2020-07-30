@@ -18,7 +18,7 @@ public:
 	void Play();
 private:
 	const int initialWindowSizeHeight = 700;
-	const int initialWindowsSizeWidth = 1200;
+	const int initialWindowsSizeWidth = 600;
 	const string title = "Worm Painters";
 	const string version = "V0.1";
 	GameStage currentStage;
