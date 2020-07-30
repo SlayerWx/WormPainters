@@ -53,7 +53,7 @@ namespace worm_painters
 	void WormPainters::Draw()
 	{
 		BeginDrawing();
-		ClearBackground(BLACK);
+		ClearBackground(BLUE);
 		switch (currentStage)
 		{
 		case Stage_SplashScreen:
