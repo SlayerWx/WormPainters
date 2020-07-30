@@ -29,10 +29,7 @@ public:
 	bool getShow();
 	void SetNewPos(float nextX, float nextY);
 	void Update(float timer);
-	void Lerp(float timer)
-	{
-
-	}
+	void Lerp(float timer);
 	void Draw();
 protected:
 	Color myColor = BLUE;

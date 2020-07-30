@@ -85,7 +85,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)lib\raylib-2.5.0-Win32\include;$(SolutionDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <PreprocessorDefinitions>DEBUG_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -112,7 +112,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)lib\raylib-2.5.0-Win32\include;$(SolutionDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <PreprocessorDefinitions>RELEASE_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -142,12 +142,16 @@
     <ClCompile Include="..\src\elements\gameplay\gameplay.cpp" />
     <ClCompile Include="..\src\elements\map\map.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\objects\object.cpp" />
+    <ClCompile Include="..\src\objects\player\player.cpp" />
     <ClCompile Include="..\src\objects\pressure_plate\pressure_plate.cpp" />
     <ClCompile Include="..\src\worm_painters\worm_painters.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\elements\gameplay\gameplay.h" />
     <ClInclude Include="..\src\elements\map\map.h" />
+    <ClInclude Include="..\src\objects\object.h" />
+    <ClInclude Include="..\src\objects\player\player.h" />
     <ClInclude Include="..\src\objects\pressure_plate\pressure_plate.h" />
     <ClInclude Include="..\src\worm_painters\worm_painters.h" />
   </ItemGroup>

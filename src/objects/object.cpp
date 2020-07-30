@@ -94,11 +94,11 @@ void Object::SetNewPos(float nextX,float nextY)
 }
 void Object::Update(float timer)
 {
-
+	timer = timer;
 }
 void Object::Lerp(float timer)
 {
-
+	timer = timer;
 }
 void Object::Draw()
 {

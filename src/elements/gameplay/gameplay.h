@@ -2,6 +2,7 @@
 #define GAMEPLAY_H
 #include "raylib.h"
 #include "elements/map/map.h"
+#include "objects/player/player.h"
 namespace worm_painters
 {
 	class Gameplay
@@ -14,6 +15,7 @@ namespace worm_painters
 		void Update();
 		void Draw();
 		Map* map;
+		Player* p;
 	private:
 		float timeGameplayScale = 1.0f;
 	};

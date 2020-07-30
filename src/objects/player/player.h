@@ -16,10 +16,10 @@ public:
 
 	void Input();
 	void Update();
+	void Draw();
 
 private:
-	static const int maxBody = 2;
-	static const int difHeadPlayerInNext = 12;
+	static const int maxBody = 20;
 	Object* body[maxBody];
 	Direction myDirection;
 	float distanceToMove;
