@@ -12,6 +12,10 @@ PressurePlate::PressurePlate(int x,int y,int width,int height)
 PressurePlate::~PressurePlate()
 {
 }
+Vector2 PressurePlate::getWidthHeight()
+{
+	return {body.width,body.height};
+}
 void PressurePlate::draw()
 {
 	DrawRectangle(static_cast<int>(body.x), 

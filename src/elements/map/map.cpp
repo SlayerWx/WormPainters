@@ -17,6 +17,10 @@ Map::Map()
 Map::~Map()
 {
 }
+Vector2 Map::GetWidthHeightPlate()
+{
+	return plates[0][0]->getWidthHeight();
+}
 void Map::draw()//asAS
 {
 	for (int i = 0; i < rowPlatesMax; i++)

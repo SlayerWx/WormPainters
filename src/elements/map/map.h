@@ -9,6 +9,7 @@ class Map
 public:
 	Map();
 	~Map();
+	Vector2 GetWidthHeightPlate();
 	void draw();
 private:
 	static const int top = 100;

@@ -15,6 +15,7 @@ void Gameplay::Restart()
 }
 void Gameplay::Input()
 {
+	
 }
 void Gameplay::Update()
 {

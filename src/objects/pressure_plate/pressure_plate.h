@@ -8,6 +8,7 @@ class PressurePlate
 public:
 	PressurePlate(int x, int y, int width, int height);
 	~PressurePlate();
+	Vector2 getWidthHeight();
 	void draw();
 private:
 	Rectangle body;
