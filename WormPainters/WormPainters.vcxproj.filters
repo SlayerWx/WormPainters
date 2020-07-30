@@ -4,10 +4,21 @@
     <Filter Include="src">
       <UniqueIdentifier>{724b1d8f-da65-47ba-a871-b9247ab41d0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\worm_painters">
+      <UniqueIdentifier>{0156620f-aa38-48f7-8570-e632b8d304a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\worm_painters\worm_painters.cpp">
+      <Filter>src\worm_painters</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\worm_painters\worm_painters.h">
+      <Filter>src\worm_painters</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
