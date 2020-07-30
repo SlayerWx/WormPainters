@@ -5,12 +5,12 @@ namespace worm_painters
 {
 enum BodyPart
 {
-	head,next
+	head = 0,next
 };
 class Object
 {
 public:
-	Object(float x, float y, float width, float height,Object* previous = nullptr);
+	Object(float x, float y, float width, float height);
 	~Object();
 	void SetX(float newX);
 	float GetX();
@@ -25,14 +25,21 @@ public:
 	float GetWidth();
 	void SetColor(Color color);
 	Color GetColor();
+	void changeShow(bool chng);
+	bool getShow();
+	void SetNewPos(float nextX, float nextY);
+	void Update(float timer);
+	void Lerp(float timer)
+	{
+
+	}
 	void Draw();
 protected:
 	Color myColor = BLUE;
 	Rectangle body;
-	Object* previousBody;
-	BodyPart im;
 	Vector2 startPosition;
 	Vector2 endPosition;
+	bool imShowing = true;
 };
 }
 #endif 

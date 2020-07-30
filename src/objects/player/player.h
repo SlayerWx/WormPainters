@@ -11,17 +11,19 @@ enum Direction
 class Player
 {
 public:
-	Player(Direction start);
+	Player(Direction start,float newDistanceToMove,Vector2 startPosition);
 	~Player();
 
 	void Input();
 	void Update();
 
 private:
-	static const int maxBody = 15;
+	static const int maxBody = 2;
 	static const int difHeadPlayerInNext = 12;
 	Object* body[maxBody];
 	Direction myDirection;
+	float distanceToMove;
+	void SetNewMoveInBody(float x, float y);
 };
 }
 #endif

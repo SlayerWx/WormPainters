@@ -2,21 +2,12 @@
 #include "raylib.h"
 namespace worm_painters
 {
-Object::Object(float x,float y,float width, float height,Object* previous = nullptr)
+Object::Object(float x,float y,float width, float height)
 {
 	body.x = x;
 	body.y = y;
 	body.width = width;
 	body.height = height;
-	previousBody = previous;
-	if (previous == nullptr)
-	{
-		im = head;
-	}
-	else
-	{
-		im = next;
-	}
 	startPosition = {0.0f,0.0f};
 	endPosition = {0.0f,0.0f};
 }
@@ -79,6 +70,35 @@ void Object::SetColor(Color color)
 Color Object::GetColor()
 {
 	return myColor;
+}
+void Object::changeShow(bool chng)
+{
+	imShowing = chng;
+}
+bool Object::getShow()
+{
+	return imShowing;
+}
+void Object::SetNewPos(float nextX,float nextY)
+{
+	if (nextX == 0.0f)
+	{
+		nextX = body.x;
+	}
+	if (nextY == 0.0f)
+	{
+		nextY = body.y;
+	}
+	startPosition = {body.x,body.y};
+	endPosition = {nextX,nextY};
+}
+void Object::Update(float timer)
+{
+
+}
+void Object::Lerp(float timer)
+{
+
 }
 void Object::Draw()
 {
