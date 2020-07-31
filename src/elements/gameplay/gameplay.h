@@ -24,8 +24,10 @@ public:
 private:
 	float timeGameplayScale = 0.1f;
 	void CheckCollision();
+	void DrawHud();
 	Texture2D playerHead;
 	Texture2D playerBody;
+	Texture2D hud;
 };
 }
 #endif

@@ -7,8 +7,11 @@ Gameplay::Gameplay()
 {
 	playerBody = LoadTexture("assets/texture/worm/body.png");
 	playerHead = LoadTexture("assets/texture/worm/head.png");
+	hud = LoadTexture("assets/texture/ui/hud.png");
 	int mp = maxPlayers;
 	map = new Map();
+	hud.width = GetScreenWidth();
+	hud.height = map->GetTop();
 	for (int i = 0; i < maxPlayers; i++)
 	{
 		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, BLUE,playerHead,playerBody);
@@ -43,6 +46,7 @@ Gameplay::Gameplay()
 }
 Gameplay::~Gameplay()
 {
+	UnloadTexture(hud);
 	UnloadTexture(playerHead);
 	UnloadTexture(playerBody);
 	for (int i = 0; i < maxPlayers; i++)
@@ -77,6 +81,7 @@ void Gameplay::Draw()
 	{
 		p[i]->Draw();
 	}
+	DrawHud();
 }
 void Gameplay::CheckCollision()
 {
@@ -97,5 +102,9 @@ void Gameplay::CheckCollision()
 			}
 		}
 	}
+}
+void Gameplay::DrawHud()
+{
+	DrawTexture(hud, 0, 0, WHITE);
 }
 }
