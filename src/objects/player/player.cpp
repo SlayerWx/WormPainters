@@ -3,7 +3,7 @@ namespace worm_painters
 {
 const float Player::timerMX = 1.0f;
 float Player::timer = 0.0f;
-Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color)
+Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color,Texture2D tHead,Texture2D tBody )//asAS
 {
 	imActive = false;
 	canChange = true;
@@ -11,6 +11,18 @@ Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Col
 	timer = 0.0f;
 	myDirection = start;
 	distanceToMove = newDistanceToMove;
+	for (int i = 0; i < maxBody; i++)
+	{
+		if (i == head)
+		{
+			body[i] = new Object(newDistanceToMove, newDistanceToMove, color,tHead);
+		}
+		else
+		{
+			body[i] = new Object(newDistanceToMove, newDistanceToMove, color, tBody);
+
+		}
+	}
 	SetPositionAndDirection(startPosition, start);
 }
 Player::~Player()
@@ -112,8 +124,8 @@ void Player::SetColor(Color newColor)
 void Player::SetPositionAndDirection(Vector2 pos, Direction dir)
 {
 	myDirection = dir;
-	body[head] = new Object(pos.x + (distanceToMove / 4), pos.y + (distanceToMove / 4),
-		distanceToMove / 2, distanceToMove / 2, myColor);
+	body[head]->Restart(pos.x + (distanceToMove / 4), pos.y + (distanceToMove / 4),
+		distanceToMove / 2, distanceToMove / 2);
 	originPosition.x = body[head]->GetX();
 	originPosition.y = body[head]->GetY();
 	originDir = dir;
@@ -121,23 +133,23 @@ void Player::SetPositionAndDirection(Vector2 pos, Direction dir)
 	{
 		if (myDirection == right)
 		{
-			body[i] = new Object(body[i - 1]->GetX() - distanceToMove, body[i - 1]->GetY(),
-				distanceToMove / 2, distanceToMove / 2, myColor);
+			body[i]->Restart(body[i - 1]->GetX() - distanceToMove, body[i - 1]->GetY(),
+				distanceToMove / 2, distanceToMove / 2);
 		}
 		else if (myDirection == down)
 		{
-			body[i] = new Object(body[i - 1]->GetX(), body[i - 1]->GetY() - distanceToMove,
-				distanceToMove / 2, distanceToMove / 2, myColor);
+			body[i]->Restart(body[i - 1]->GetX(), body[i - 1]->GetY() - distanceToMove,
+				distanceToMove / 2, distanceToMove / 2);
 		}
 		else if (myDirection == left)
 		{
-			body[i] = new Object(body[i - 1]->GetX() + distanceToMove, body[i - 1]->GetY(),
-				distanceToMove / 2, distanceToMove / 2, myColor);
+			body[i]->Restart(body[i - 1]->GetX() + distanceToMove, body[i - 1]->GetY(),
+				distanceToMove / 2, distanceToMove / 2);
 		}
 		else if (myDirection == up)
 		{
-			body[i] = new Object(body[i - 1]->GetX(), body[i - 1]->GetY() + distanceToMove,
-				distanceToMove / 2, distanceToMove / 2, myColor);
+			body[i]->Restart(body[i - 1]->GetX(), body[i - 1]->GetY() + distanceToMove,
+				distanceToMove / 2, distanceToMove / 2);
 		}
 	}
 }

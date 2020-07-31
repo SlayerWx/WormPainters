@@ -12,7 +12,7 @@ public:
 	void draw();
 	Rectangle GetBody();
 	void SetColor(Color color);
-	void SetSplashed(bool w);
+	void SetSplashed(bool restart);
 private:
 	Rectangle body;
 	Color myColor = WHITE;

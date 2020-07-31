@@ -10,8 +10,9 @@ enum BodyPart
 class Object
 {
 public:
-	Object(float x, float y, float width, float height,Color color);
+	Object(float width, float height, Color color, Texture2D texture);
 	~Object();
+	void Restart(float x, float y, float width, float height);
 	void SetX(float newX);
 	float GetX();
 	void SetY(float newY);
@@ -32,12 +33,14 @@ public:
 	void Lerp(float timer);
 	void Draw();
 	Rectangle GetBody();
-protected:
+private:
 	Color myColor = GRAY;
 	Rectangle body;
 	Vector2 startPosition;
 	Vector2 endPosition;
 	bool imShowing = true;
+	Texture2D myTexture;
+	int centrerTextureInCubeModif = 4;
 };
 }
 #endif 

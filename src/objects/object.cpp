@@ -2,18 +2,25 @@
 #include "raylib.h"
 namespace worm_painters
 {
-Object::Object(float x,float y,float width, float height,Color color)
+Object::Object(float width, float height,Color color,Texture2D texture)
+{
+	myColor = color;
+	myTexture = texture;
+	myTexture.width = static_cast<int>(width);
+	myTexture.height = static_cast<int>(height);
+	
+}
+Object::~Object()
+{
+}
+void Object::Restart(float x,float y, float width, float height)
 {
 	body.x = x;
 	body.y = y;
 	body.width = width;
 	body.height = height;
-	startPosition = {x,y};
-	endPosition = {x,y};
-	myColor = color;
-}
-Object::~Object()
-{
+	startPosition = { x,y };
+	endPosition = { x,y };
 }
 void Object::SetX(float x)
 {
@@ -100,6 +107,8 @@ void Object::Draw()
 	DrawRectangle(static_cast<int>(body.x), static_cast<int>(body.y),
 		static_cast<int>(body.width), static_cast<int>(body.height), myColor);
 #endif
+	DrawTexture(myTexture, static_cast<int>(body.x - (myTexture.width / centrerTextureInCubeModif)),
+		static_cast<int>(body.y - (myTexture.height/centrerTextureInCubeModif)),myColor);
 }
 Rectangle Object::GetBody()
 {

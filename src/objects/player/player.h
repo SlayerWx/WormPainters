@@ -18,7 +18,7 @@ struct Key
 class Player
 {
 public:
-	Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color);
+	Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color,Texture2D tHead,Texture2D tBody);
 	~Player();
 
 	void Input(float timeScale);
