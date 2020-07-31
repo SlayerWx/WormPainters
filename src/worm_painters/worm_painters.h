@@ -3,6 +3,7 @@
 #include <iostream>
 #include "raylib.h"
 #include "elements/gameplay/gameplay.h"
+#include "elements/menu/menu.h"
 namespace worm_painters
 {
 using namespace std;
@@ -23,9 +24,11 @@ private:
 	const string version = "V0.1";
 	GameStage currentStage;
 	Gameplay* gameplay;
+	Menu* menu;
 	void Input();
 	void Update();
 	void Draw();
+	void RequestExit();
 };
 }
 #endif

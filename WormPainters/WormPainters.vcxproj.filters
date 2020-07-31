@@ -25,6 +25,9 @@
     <Filter Include="src\objects\player">
       <UniqueIdentifier>{caa5c8be-42c5-4c72-9370-a650b1585702}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\elements\menu">
+      <UniqueIdentifier>{bf16fbba-a813-4a3a-8c72-bd432aa45dc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -48,6 +51,9 @@
     <ClCompile Include="..\src\objects\object.cpp">
       <Filter>src\objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\elements\menu\menu.cpp">
+      <Filter>src\elements\menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\worm_painters\worm_painters.h">
@@ -67,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="..\src\objects\object.h">
       <Filter>src\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\elements\menu\menu.h">
+      <Filter>src\elements\menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

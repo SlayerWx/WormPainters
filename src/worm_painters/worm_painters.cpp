@@ -1,13 +1,17 @@
 #include "worm_painters.h"
 
 #include "raylib.h"
+
+#include "elements/gameplay/gameplay.h"
+#include "elements/menu/menu.h"
 namespace worm_painters
 {
 	WormPainters::WormPainters()
 	{
 		InitWindow(initialWindowsSizeWidth, initialWindowSizeHeight, (title + ' ' + version).c_str());
-		currentStage = Stage_Gameplay;
+		currentStage = Stage_Menu;
 		gameplay = new Gameplay();
+		menu = new Menu();
 	}
 	WormPainters::~WormPainters()
 	{
@@ -16,7 +20,7 @@ namespace worm_painters
 	}
 	void WormPainters::Play()
 	{
-		while (!WindowShouldClose())
+		while (!WindowShouldClose() && !menu->RequestExit())
 		{
 			Input();
 			Update();
@@ -30,6 +34,7 @@ namespace worm_painters
 		case Stage_SplashScreen:
 			break;
 		case Stage_Menu:
+			menu->Input();
 			break;
 		case Stage_Gameplay:
 			gameplay->Input();
@@ -43,6 +48,7 @@ namespace worm_painters
 		case Stage_SplashScreen:
 			break;
 		case Stage_Menu:
+			menu->Update();
 			break;
 		case Stage_Gameplay:
 			gameplay->Update();
@@ -59,6 +65,7 @@ namespace worm_painters
 		case Stage_SplashScreen:
 			break;
 		case Stage_Menu:
+			menu->Draw();
 			break;
 		case Stage_Gameplay:
 			gameplay->Draw();
