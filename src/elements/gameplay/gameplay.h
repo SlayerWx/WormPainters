@@ -38,7 +38,7 @@ private:
 	void DrawTime();
 	static const int startTimeMinute = 3;
 	const float mxSeconds = 60.0f;
-	const int decimal = 10;
+	const int ten = 10;
 	const int theHalf = 2;
 	int timer = 0;
 	float seconds = 0;
@@ -60,6 +60,10 @@ private:
 	const int four = 4;
 	const int eight = 8;
 	int mxPlayersInGame;
+	bool draw;
+	bool overDeadTime;
+	float overDead;
+	const float mxOverDead = 5.0f;
 };
 }
 #endif

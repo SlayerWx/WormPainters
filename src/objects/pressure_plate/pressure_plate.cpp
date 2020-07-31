@@ -47,6 +47,10 @@ void PressurePlate::SetColor(Color color)
 {
 	myColor = color;
 }
+Color PressurePlate::GetColor()
+{
+	return myColor;
+}
 void PressurePlate::SetSplashed(bool restart)
 {
 	isSplashed = restart;

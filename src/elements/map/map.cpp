@@ -46,22 +46,31 @@ void Map::draw()//asAS
 		}
 	}
 }
-void Map::CheckCollision(Rectangle player,Color playerColor)
+bool Map::CheckCollision(Rectangle player,Color playerColor)//asAS
 {
 	for (int i = 0; i < rowPlatesMax; i++)
 	{
 		for (int t = 0; t < columnPlatesMax; t++)
 		{
-			if (CheckCollisionRecs(player, plates[i][t]->GetBody()))
+			if (CheckCollisionRecs(player, plates[i][t]->GetBody()) &&
+				(playerColor.a != plates[i][t]->GetColor().a||
+				playerColor.b != plates[i][t]->GetColor().b||
+				playerColor.g != plates[i][t]->GetColor().g))
 			{
 				plates[i][t]->SetColor(playerColor);
 				plates[i][t]->SetSplashed(true);
+				return true;
 			}
 		}
 	}
+	return false;
 }
 int Map::GetTop()
 {
 	return top;
+}
+int Map::GetValor()
+{
+	return plateValor;
 }
 }

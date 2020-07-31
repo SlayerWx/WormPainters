@@ -9,6 +9,9 @@ namespace worm_painters
 {
 Gameplay::Gameplay()
 {
+	overDeadTime = false;
+	overDead = mxOverDead;
+	draw = true;
 	timerToMenu = timerMxToMenu;
 	goToMenu = false;
 	timer = startTimeMinute;
@@ -131,7 +134,10 @@ void Gameplay::CheckCollision()
 	{
 		if (p[i]->GetActive())
 		{
-			map->CheckCollision(p[i]->GetHead(), p[i]->GetColor());
+			if (map->CheckCollision(p[i]->GetHead(), p[i]->GetColor()) && !p[i]->GetDead())
+			{
+				p[i]->SetPoints(p[i]->GetPoints()+ map->GetValor());
+			}
 		}
 		for (int t = 0; t < maxPlayers; t++)
 		{	
@@ -162,27 +168,48 @@ void Gameplay::WinCondition()
 		checkPlayerWin = 0;
 		for (int i = 0; i < maxPlayers; i++)
 		{
-			if (p[i]->GetDead())
+			if (!p[i]->GetDead())
 			{
 				check++;
 			}
 			else
 			{
-				checkPlayerWin = i++;
+				checkPlayerWin = i;
 			}
 		}
-		if (check == maxPlayers)
+		if (check == 0)
 		{
 			timeGameplayScale = 0.0f;
 			endGame = true;
+			int rememberPoint = 0;
+			for (int i = 0; i < maxPlayers; i++)
+			{
+				if(p[i]->GetPoints() > rememberPoint)
+				checkPlayerWin = i;
+				rememberPoint = p[i]->GetPoints();
+			}
 		}
-		else if (check == maxPlayers - 1)
+		if (check == 1)
 		{
-			timeGameplayScale = 0.0f;
-			endGame = true;
-			
+			draw = false;
+			overDeadTime = true;
 		}
-		
+		if (overDeadTime)
+		{
+			overDead -= GetFrameTime() * timeGameplayScale;
+			if (overDead < 0.0f)
+			{
+				timeGameplayScale = 0.0f;
+				endGame = true;
+				for (int i = 0; i < maxPlayers; i++)
+				{
+					if (!p[i]->GetDead())
+					{
+						checkPlayerWin = i;
+					}
+				}
+			}
+		}
 	}
 	if (endGame)
 	{
@@ -193,9 +220,18 @@ void Gameplay::DrawWinner()//asAS
 {
 	if (endGame)
 	{
-		const char* w = FormatText("Winner Player %i", checkPlayerWin);
+		if (draw)
+		{
+			const char* w = FormatText("Draw!", (checkPlayerWin + 1));
 
-		DrawText(w, (GetScreenWidth() / theHalf) - (sizeof(w) * sizeFontWin), GetScreenHeight() / theHalf, sizeFontWin, winColor);
+			DrawText(w, (GetScreenWidth() / theHalf) - (sizeof(w) * sizeFontWin/2), GetScreenHeight() / theHalf, sizeFontWin, winColor);
+		}
+		else if (!draw)
+		{
+			const char* w = FormatText("Winner Player %i", (checkPlayerWin + 1));
+
+			DrawText(w, (GetScreenWidth() / theHalf) - (sizeof(w) * sizeFontWin), GetScreenHeight() / theHalf, sizeFontWin, winColor);
+		}
 	}
 }
 void Gameplay::Timing()
@@ -237,7 +273,7 @@ void Gameplay::DrawTime()//asAS
 	{
 		DrawText(FormatText("%i", p[playerFour]->GetPoints()), hud.width - timeSizeFont * four, (hud.height / theHalf)+ (timeSizeFont/theHalf), timeSizeFont, WHITE);
 	}
-	if (seconds < decimal)
+	if (seconds < ten)
 	{
 		const char* w = FormatText("%i:0%i", timer, static_cast<int>(seconds));
 		DrawText(w, (hud.width/theHalf) - (sizeof(w) / theHalf) * ((timeSizeFont / theHalf)), (hud.height/ theHalf) - 

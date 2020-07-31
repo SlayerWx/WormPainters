@@ -21,7 +21,7 @@ public:
 private:
 	bool show;
 	Rectangle body;
-	int valor = 10;
+	int valor = 50;
 	Texture2D mytexture;
 	
 };

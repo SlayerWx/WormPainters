@@ -39,8 +39,9 @@ public:
 	bool GetDead();
 	bool CheckEnemyCollision(Rectangle eHead);
 private:
-	static const int maxBody = 20;
+	static const int maxBody = 25;
 	Object* body[maxBody];
+	int bodyActived = 0;
 	Direction myDirection;
 	float distanceToMove;
 	void SetNewMoveInBody();
@@ -58,6 +59,7 @@ private:
 	static const int theHalf = 2;
 	int myPoints = 0;
 	void CheckSelfCollision();
+	const int goal = 100;
 };
 }
 #endif

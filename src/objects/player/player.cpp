@@ -8,7 +8,7 @@ namespace worm_painters
 const float Player::timerMX = 1.0f;
 Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color,Texture2D tHead,Texture2D tBody )//asAS
 {
-	
+	bodyActived = 0;
 	myColor = color;
 	distanceToMove = newDistanceToMove;
 	originDir = start;
@@ -27,6 +27,7 @@ Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Col
 			if (i == next)
 			{
 				body[i]->SetActive(true);
+				
 			}
 		}
 	}
@@ -188,6 +189,18 @@ int Player::GetPoints()
 void Player::SetPoints(int p)
 {
 	myPoints = p;
+	if (myPoints > bodyActived * goal)
+	{
+		for (int i = 0; i < maxBody; i++)
+		{
+			if (!body[i]->GetActive())
+			{
+				body[i]->SetActive(true);
+				i  = maxBody;
+				bodyActived++;
+			}
+		}
+	}
 }
 void Player::SetControls(KeyboardKey up, KeyboardKey down, KeyboardKey left, KeyboardKey right)
 {

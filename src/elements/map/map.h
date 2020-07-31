@@ -11,8 +11,9 @@ public:
 	~Map();
 	Vector2 GetWidthHeightPlate();
 	void draw();
-	void CheckCollision(Rectangle player,Color playerColor);
+	bool CheckCollision(Rectangle player,Color playerColor);
 	int GetTop();
+	int GetValor();
 private:
 	static const int top = 100;
 	static const int rowPlatesMax = 20;
@@ -20,6 +21,7 @@ private:
 	PressurePlate* plates[rowPlatesMax][columnPlatesMax];
 	Texture2D platesBakground;
 	Texture2D platesSplash;
+	int plateValor = 1;
 };
 }
 #endif

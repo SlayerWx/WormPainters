@@ -12,6 +12,7 @@ public:
 	void draw();
 	Rectangle GetBody();
 	void SetColor(Color color);
+	Color GetColor();
 	void SetSplashed(bool restart);
 private:
 	Rectangle body;
