@@ -32,10 +32,11 @@ private:
 	void DrawWinner();
 	void Timing();
 	void DrawTime();
-	static const int startTimeMinute = 4;
+	static const int startTimeMinute = 0;
 	const float mxSeconds = 60.0f;
 	int timer = 0;
 	float seconds = 0;
+	int timeSizeFont = 30;
 	Texture2D playerHead;
 	Texture2D playerBody;
 	Texture2D hud;

@@ -178,11 +178,13 @@ void Gameplay::DrawTime()
 {
 	if (seconds < 10)
 	{
-		DrawText(FormatText("%i:0%i", timer,static_cast<int>(seconds)), 10, 30, 30, WHITE);
+		const char* w = FormatText("%i:0%i", timer, static_cast<int>(seconds));
+		DrawText(w, (hud.width/2) - (sizeof(w) / 2) * ((timeSizeFont / 2)), (hud.height/2) - timeSizeFont/2, timeSizeFont, WHITE);
 	}
 	else
 	{
-		DrawText(FormatText("%i:%i", timer, static_cast<int>(seconds)), 10, 30, 30, WHITE);
+		const char* w = FormatText("%i:%i", timer, static_cast<int>(seconds));
+		DrawText(w, (GetScreenWidth()/2) - (sizeof(w)/2) * ((timeSizeFont/2)), (hud.height/2)-timeSizeFont/2, timeSizeFont, WHITE);
 	}
 }
 }
