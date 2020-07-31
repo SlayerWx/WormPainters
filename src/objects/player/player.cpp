@@ -212,7 +212,7 @@ void Player::CheckSelfCollision()
 {
 	for (int i = next; i < maxBody; i++)
 	{
-		if (CheckCollisionRecs(body[head]->GetBody(), body[i]->GetBody()))
+		if (CheckCollisionRecs(body[head]->GetBody(), body[i]->GetBody()) && body[i]->GetActive())
 		{
 			imDead = true;
 		}

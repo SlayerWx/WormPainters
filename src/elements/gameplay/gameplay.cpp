@@ -4,6 +4,7 @@ namespace worm_painters
 {
 Gameplay::Gameplay()
 {
+	timer = startTimeMinute;
 	endGame = false;
 	timeGameplayScale = defaultGamePlayScale;
 	playerBody = LoadTexture("assets/texture/worm/body.png");
@@ -75,7 +76,8 @@ void Gameplay::Update()
 		p[i]->Update(timeGameplayScale,map->GetTop());
 	}
 	CheckCollision();
-	WinCondition();
+	Timing();
+	WinCondition();;
 }
 void Gameplay::Draw()
 {
@@ -110,6 +112,7 @@ void Gameplay::CheckCollision()
 void Gameplay::DrawHud()
 {
 	DrawTexture(hud, 0, 0, WHITE);
+	DrawTime();
 }
 void Gameplay::WinCondition()
 {
@@ -125,12 +128,13 @@ void Gameplay::WinCondition()
 			}
 			else
 			{
-				checkPlayerWin = i + 1;
+				checkPlayerWin = i++;
 			}
 		}
 		if (check == maxPlayers)
 		{
-
+			timeGameplayScale = 0.0f;
+			endGame = true;
 		}
 		else if (check == maxPlayers - 1)
 		{
@@ -145,7 +149,40 @@ void Gameplay::DrawWinner()//asAS
 	if (endGame)
 	{
 		const char* w = FormatText("Winner Player %i", checkPlayerWin);
+
 		DrawText(w, (GetScreenWidth() / 2) - (sizeof(w) * sizeFontWin), GetScreenHeight() / 2, sizeFontWin, winColor);
+	}
+}
+void Gameplay::Timing()
+{
+	if (timer >= 0 && 0.0f != timeGameplayScale)
+	{
+		seconds -= GetFrameTime() * timeGameplayScale;
+		if (seconds < 0.0f)
+		{
+			seconds = mxSeconds;
+			timer--;
+		}
+	}
+	else
+	{
+		for (int i = 0; i < maxPlayers; i++)
+		{
+			p[i]->SetDead(true);
+		}
+		timer = 0;
+		seconds = 0.0f;
+	}
+}
+void Gameplay::DrawTime()
+{
+	if (seconds < 10)
+	{
+		DrawText(FormatText("%i:0%i", timer,static_cast<int>(seconds)), 10, 30, 30, WHITE);
+	}
+	else
+	{
+		DrawText(FormatText("%i:%i", timer, static_cast<int>(seconds)), 10, 30, 30, WHITE);
 	}
 }
 }

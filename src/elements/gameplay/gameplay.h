@@ -1,8 +1,10 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
+#include <iostream>
 #include "raylib.h"
 #include "elements/map/map.h"
 #include "objects/player/player.h"
+using namespace std;
 namespace worm_painters
 {
 enum playerNumber
@@ -28,10 +30,15 @@ private:
 	void DrawHud();
 	void WinCondition();
 	void DrawWinner();
+	void Timing();
+	void DrawTime();
+	static const int startTimeMinute = 4;
+	const float mxSeconds = 60.0f;
+	int timer = 0;
+	float seconds = 0;
 	Texture2D playerHead;
 	Texture2D playerBody;
 	Texture2D hud;
-	static const int startTimeMinute = 3;
 	const Color winColor = BLACK;
 	int sizeFontWin;
 	const Color playerOneColor = BLUE;
