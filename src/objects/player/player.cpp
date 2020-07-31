@@ -4,14 +4,11 @@ namespace worm_painters
 const float Player::timerMX = 1.0f;
 Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color,Texture2D tHead,Texture2D tBody )//asAS
 {
-	timer = 0.0f;
-	imActive = false;
-	imDead = false;
-	canChange = true;
+	
 	myColor = color;
-	timer = 0.0f;
-	myDirection = start;
 	distanceToMove = newDistanceToMove;
+	originDir = start;
+	originPosition = startPosition;
 	for (int i = 0; i < maxBody; i++)
 	{
 		if (i == head)
@@ -29,7 +26,8 @@ Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Col
 			}
 		}
 	}
-	SetPositionAndDirection(startPosition, start);
+	restart(true);
+	
 }
 Player::~Player()
 {
@@ -37,6 +35,15 @@ Player::~Player()
 	{
 		if (body[i]) delete body[i];
 	}
+}
+void Player::restart(bool ctive)
+{
+	myPoints = 0;
+	timer = 0.0f;
+	imActive = ctive;
+	imDead = false;
+	canChange = true;
+	SetPositionAndDirection(originPosition, originDir);
 }
 void Player::Input(float timeScale)//asAS
 {
@@ -145,8 +152,6 @@ void Player::SetPositionAndDirection(Vector2 pos, Direction dir)
 	myDirection = dir;
 	body[head]->Restart(pos.x + (distanceToMove / correctorScaleXPosition), pos.y + (distanceToMove / correctorScaleXPosition),
 		distanceToMove / theHalf, distanceToMove / theHalf);
-	originPosition.x = body[head]->GetX();
-	originPosition.y = body[head]->GetY();
 	originDir = dir;
 	for (int i = 1; i < maxBody; i++)
 	{
@@ -171,6 +176,14 @@ void Player::SetPositionAndDirection(Vector2 pos, Direction dir)
 				distanceToMove / theHalf, distanceToMove / theHalf);
 		}
 	}
+}
+int Player::GetPoints()
+{
+	return myPoints;
+}
+void Player::SetPoints(int p)
+{
+	myPoints = p;
 }
 void Player::SetControls(KeyboardKey up, KeyboardKey down, KeyboardKey left, KeyboardKey right)
 {
@@ -198,6 +211,7 @@ bool Player::CheckEnemyCollision(Rectangle eHead)
 	}
 	return false;
 }
+
 void Player::SetNewMoveInBody()//asAS
 {
 	Vector2 ux = moveToDirection();

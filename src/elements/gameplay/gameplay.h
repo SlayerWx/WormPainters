@@ -32,8 +32,10 @@ private:
 	void DrawWinner();
 	void Timing();
 	void DrawTime();
-	static const int startTimeMinute = 0;
+	static const int startTimeMinute = 3;
 	const float mxSeconds = 60.0f;
+	const int decimal = 10;
+	const int theHalf = 2;
 	int timer = 0;
 	float seconds = 0;
 	int timeSizeFont = 30;

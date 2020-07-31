@@ -61,6 +61,10 @@ Gameplay::~Gameplay()
 }
 void Gameplay::Restart()
 {
+	for (int i = 0; i < maxPlayers; i++)
+	{
+
+	}
 }
 void Gameplay::Input()
 {
@@ -150,7 +154,7 @@ void Gameplay::DrawWinner()//asAS
 	{
 		const char* w = FormatText("Winner Player %i", checkPlayerWin);
 
-		DrawText(w, (GetScreenWidth() / 2) - (sizeof(w) * sizeFontWin), GetScreenHeight() / 2, sizeFontWin, winColor);
+		DrawText(w, (GetScreenWidth() / theHalf) - (sizeof(w) * sizeFontWin), GetScreenHeight() / theHalf, sizeFontWin, winColor);
 	}
 }
 void Gameplay::Timing()
@@ -164,7 +168,7 @@ void Gameplay::Timing()
 			timer--;
 		}
 	}
-	else
+	else if (timer < 0)
 	{
 		for (int i = 0; i < maxPlayers; i++)
 		{
@@ -176,15 +180,17 @@ void Gameplay::Timing()
 }
 void Gameplay::DrawTime()
 {
-	if (seconds < 10)
+	if (seconds < decimal)
 	{
 		const char* w = FormatText("%i:0%i", timer, static_cast<int>(seconds));
-		DrawText(w, (hud.width/2) - (sizeof(w) / 2) * ((timeSizeFont / 2)), (hud.height/2) - timeSizeFont/2, timeSizeFont, WHITE);
+		DrawText(w, (hud.width/theHalf) - (sizeof(w) / theHalf) * ((timeSizeFont / theHalf)), (hud.height/ theHalf) - 
+			timeSizeFont/ theHalf, timeSizeFont, WHITE);
 	}
 	else
 	{
 		const char* w = FormatText("%i:%i", timer, static_cast<int>(seconds));
-		DrawText(w, (GetScreenWidth()/2) - (sizeof(w)/2) * ((timeSizeFont/2)), (hud.height/2)-timeSizeFont/2, timeSizeFont, WHITE);
+		DrawText(w, (GetScreenWidth()/ theHalf) - (sizeof(w)/ theHalf) * ((timeSizeFont/ theHalf)), 
+			(hud.height/ theHalf)-timeSizeFont/ theHalf, timeSizeFont, WHITE);
 	}
 }
 }
