@@ -11,7 +11,7 @@ Gameplay::Gameplay()
 	map = new Map();
 	for (int i = 0; i < maxPlayers; i++)
 	{
-		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, RED,playerHead,playerBody);
+		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, BLUE,playerHead,playerBody);
 		p[i]->SetActive(false);
 	}
 	if (!(playerOne >= mp))
@@ -85,6 +85,16 @@ void Gameplay::CheckCollision()
 		if (p[i]->GetActive())
 		{
 			map->CheckCollision(p[i]->GetHead(), p[i]->GetColor());
+		}
+		for (int t = 0; t < maxPlayers; t++)
+		{	
+			if (t!=i)
+			{
+				if (p[i]->CheckEnemyCollision(p[t]->GetHead()))
+				{
+					p[t]->SetDead(true);
+				}
+			}
 		}
 	}
 }

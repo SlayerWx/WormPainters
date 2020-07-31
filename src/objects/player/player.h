@@ -33,13 +33,14 @@ public:
 	void SetControls(KeyboardKey up, KeyboardKey down, KeyboardKey left, KeyboardKey right);
 	void SetDead(bool d);
 	bool GetDead();
+	bool CheckEnemyCollision(Rectangle eHead);
 private:
 	static const int maxBody = 20;
 	Object* body[maxBody];
 	Direction myDirection;
 	float distanceToMove;
 	void SetNewMoveInBody();
-	static float timer;
+	float timer;
 	static const float timerMX;
 	float speed = 10.0f;
 	Color myColor = GRAY;

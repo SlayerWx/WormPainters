@@ -19,10 +19,10 @@ public:
 	void Update();
 	void Draw();
 	Map* map;
-	static const int maxPlayers = 1;
+	static const int maxPlayers = 2;
 	Player* p[maxPlayers];
 private:
-	float timeGameplayScale = 1.0f;
+	float timeGameplayScale = 0.1f;
 	void CheckCollision();
 	Texture2D playerHead;
 	Texture2D playerBody;

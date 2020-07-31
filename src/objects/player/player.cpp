@@ -2,9 +2,9 @@
 namespace worm_painters
 {
 const float Player::timerMX = 1.0f;
-float Player::timer = 0.0f;
 Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color,Texture2D tHead,Texture2D tBody )//asAS
 {
+	timer = 0.0f;
 	imActive = false;
 	imDead = false;
 	canChange = true;
@@ -181,6 +181,17 @@ void Player::SetDead(bool d)
 bool Player::GetDead()
 {
 	return imDead;
+}
+bool Player::CheckEnemyCollision(Rectangle eHead)
+{
+	for (int i = 0; i < maxBody; i++)
+	{
+		if (CheckCollisionRecs(eHead, body[i]->GetBody()) )
+		{
+			return true;
+		}
+	}
+	return false;
 }
 void Player::SetNewMoveInBody()//asAS
 {
