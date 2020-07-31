@@ -1,10 +1,11 @@
 #include "gameplay.h"
-
 #include "raylib.h"
 namespace worm_painters
 {
 Gameplay::Gameplay()
 {
+	endGame = false;
+	timeGameplayScale = defaultGamePlayScale;
 	playerBody = LoadTexture("assets/texture/worm/body.png");
 	playerHead = LoadTexture("assets/texture/worm/head.png");
 	hud = LoadTexture("assets/texture/ui/hud.png");
@@ -12,9 +13,10 @@ Gameplay::Gameplay()
 	map = new Map();
 	hud.width = GetScreenWidth();
 	hud.height = map->GetTop();
+	sizeFontWin = static_cast<int>(map->GetWidthHeightPlate().x * 2);
 	for (int i = 0; i < maxPlayers; i++)
 	{
-		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, BLUE,playerHead,playerBody);
+		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, playerOneColor,playerHead,playerBody);
 		p[i]->SetActive(false);
 	}
 	if (!(playerOne >= mp))
@@ -24,21 +26,21 @@ Gameplay::Gameplay()
 	}
 	if (!(playerTwo >= mp))
 	{
-		p[playerTwo]->SetColor(RED);
+		p[playerTwo]->SetColor(playerTwoColor);
 		p[playerTwo]->SetControls(KEY_R, KEY_F, KEY_D, KEY_G);
 		p[playerTwo]->SetPositionAndDirection({ GetScreenWidth() - map->GetWidthHeightPlate().x,static_cast<float>(map->GetTop()) }, down);
 		p[playerTwo]->SetActive(true);
 	}
 	if (!(playerTree >= mp))
 	{
-		p[playerTree]->SetColor(YELLOW);
+		p[playerTree]->SetColor(playerTreeColor);
 		p[playerTree]->SetControls(KEY_U, KEY_J, KEY_H, KEY_K);
 		p[playerTree]->SetPositionAndDirection({ 0.0f,GetScreenHeight() - map->GetWidthHeightPlate().y }, up);
 		p[playerTree]->SetActive(true);
 	}
 	if(!(playerFour >= mp))
 	{ 
-		p[playerFour]->SetColor(VIOLET);
+		p[playerFour]->SetColor(playerFourColor);
 		p[playerFour]->SetControls(KEY_C,KEY_SPACE,KEY_X,KEY_V);
 		p[playerFour]->SetPositionAndDirection({ GetScreenWidth() - map->GetWidthHeightPlate().x,GetScreenHeight() - map->GetWidthHeightPlate().y }, left);
 		p[playerFour]->SetActive(true);
@@ -73,6 +75,7 @@ void Gameplay::Update()
 		p[i]->Update(timeGameplayScale,map->GetTop());
 	}
 	CheckCollision();
+	WinCondition();
 }
 void Gameplay::Draw()
 {
@@ -82,6 +85,7 @@ void Gameplay::Draw()
 		p[i]->Draw();
 	}
 	DrawHud();
+	DrawWinner();
 }
 void Gameplay::CheckCollision()
 {
@@ -106,5 +110,42 @@ void Gameplay::CheckCollision()
 void Gameplay::DrawHud()
 {
 	DrawTexture(hud, 0, 0, WHITE);
+}
+void Gameplay::WinCondition()
+{
+	if (timeGameplayScale != 0.0f)
+	{
+		int check = 0;
+		checkPlayerWin = 0;
+		for (int i = 0; i < maxPlayers; i++)
+		{
+			if (p[i]->GetDead())
+			{
+				check++;
+			}
+			else
+			{
+				checkPlayerWin = i + 1;
+			}
+		}
+		if (check == maxPlayers)
+		{
+
+		}
+		else if (check == maxPlayers - 1)
+		{
+			timeGameplayScale = 0.0f;
+			endGame = true;
+			
+		}
+	}
+}
+void Gameplay::DrawWinner()//asAS
+{
+	if (endGame)
+	{
+		const char* w = FormatText("Winner Player %i", checkPlayerWin);
+		DrawText(w, (GetScreenWidth() / 2) - (sizeof(w) * sizeFontWin), GetScreenHeight() / 2, sizeFontWin, winColor);
+	}
 }
 }
