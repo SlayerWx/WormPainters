@@ -107,11 +107,22 @@ void Object::Draw()
 	DrawRectangle(static_cast<int>(body.x), static_cast<int>(body.y),
 		static_cast<int>(body.width), static_cast<int>(body.height), myColor);
 #endif
-	DrawTexture(myTexture, static_cast<int>(body.x - (myTexture.width / centrerTextureInCubeModif)),
-		static_cast<int>(body.y - (myTexture.height/centrerTextureInCubeModif)),myColor);
+	if (imActive)
+	{
+		DrawTexture(myTexture, static_cast<int>(body.x - (myTexture.width / centrerTextureInCubeModif)),
+			static_cast<int>(body.y - (myTexture.height / centrerTextureInCubeModif)), myColor);
+	}
 }
 Rectangle Object::GetBody()
 {
 	return body;
+}
+void Object::SetActive(bool ctive)
+{
+	imActive = ctive;
+}
+bool Object::GetActive()
+{
+	return imActive;
 }
 }

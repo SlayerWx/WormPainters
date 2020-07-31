@@ -17,11 +17,16 @@ Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Col
 		if (i == head)
 		{
 			body[i] = new Object(newDistanceToMove, newDistanceToMove, color,tHead);
+			body[i]->SetActive(true);
 		}
 		else
 		{
 			body[i] = new Object(newDistanceToMove, newDistanceToMove, color, tBody);
-
+			body[i]->SetActive(false);
+			if (i == next)
+			{
+				body[i]->SetActive(true);
+			}
 		}
 	}
 	SetPositionAndDirection(startPosition, start);
@@ -186,7 +191,7 @@ bool Player::CheckEnemyCollision(Rectangle eHead)
 {
 	for (int i = 0; i < maxBody; i++)
 	{
-		if (CheckCollisionRecs(eHead, body[i]->GetBody()) )
+		if (CheckCollisionRecs(eHead, body[i]->GetBody()) && body[i]->GetActive())
 		{
 			return true;
 		}

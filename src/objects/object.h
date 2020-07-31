@@ -33,6 +33,8 @@ public:
 	void Lerp(float timer);
 	void Draw();
 	Rectangle GetBody();
+	void SetActive(bool ctive);
+	bool GetActive();
 private:
 	Color myColor = GRAY;
 	Rectangle body;
@@ -41,6 +43,7 @@ private:
 	bool imShowing = true;
 	Texture2D myTexture;
 	int centrerTextureInCubeModif = 4;
+	bool imActive;
 };
 }
 #endif 
