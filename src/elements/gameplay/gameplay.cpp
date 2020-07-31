@@ -10,12 +10,16 @@ Gameplay::Gameplay()
 	{
 		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, BLUE);
 	}
-	p[1]->SetColor(RED);
-	p[1]->SetPositionAndDirection({ GetScreenWidth() -map->GetWidthHeightPlate().x,static_cast<float>(map->GetTop()) },down);
-	p[2]->SetColor(YELLOW);
-	p[2]->SetPositionAndDirection({ 0.0f,GetScreenHeight() - map->GetWidthHeightPlate().y }, up);
-	p[3]->SetColor(VIOLET);
-	p[3]->SetPositionAndDirection({ GetScreenWidth() - map->GetWidthHeightPlate().x,GetScreenHeight() - map->GetWidthHeightPlate().y }, left);
+	p[playerOne]->SetControls(KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT);
+	p[playerTwo]->SetColor(RED);
+	p[playerTwo]->SetControls(KEY_R, KEY_F, KEY_D, KEY_G);
+	p[playerTwo]->SetPositionAndDirection({ GetScreenWidth() -map->GetWidthHeightPlate().x,static_cast<float>(map->GetTop()) },down);
+	p[playerTree]->SetColor(YELLOW);
+	p[playerTree]->SetControls(KEY_U,KEY_J,KEY_H,KEY_K);
+	p[playerTree]->SetPositionAndDirection({ 0.0f,GetScreenHeight() - map->GetWidthHeightPlate().y }, up);
+	p[playerFour]->SetColor(VIOLET);
+	p[playerFour]->SetControls(KEY_C,KEY_SPACE,KEY_X,KEY_V);
+	p[playerFour]->SetPositionAndDirection({ GetScreenWidth() - map->GetWidthHeightPlate().x,GetScreenHeight() - map->GetWidthHeightPlate().y }, left);
 }
 Gameplay::~Gameplay()
 {

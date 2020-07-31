@@ -8,6 +8,13 @@ enum Direction
 {
 	right,left,up,down
 };
+struct Key
+{
+	KeyboardKey up;
+	KeyboardKey down;
+	KeyboardKey left;
+	KeyboardKey right;
+};
 class Player
 {
 public:
@@ -23,6 +30,7 @@ public:
 	void SetActive(bool active);
 	void SetColor(Color newColor);
 	void SetPositionAndDirection(Vector2 pos, Direction dir);
+	void SetControls(KeyboardKey up, KeyboardKey down, KeyboardKey left, KeyboardKey right);
 private:
 	static const int maxBody = 20;
 	Object* body[maxBody];
@@ -35,6 +43,9 @@ private:
 	Color myColor = GRAY;
 	bool canChange;
 	bool imActive;
+	Vector2 originPosition;
+	Direction originDir;
+	Key controls;
 };
 }
 #endif

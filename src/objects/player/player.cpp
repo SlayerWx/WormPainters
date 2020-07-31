@@ -24,19 +24,19 @@ void Player::Input(float timeScale)//asAS
 {
 	if (timeScale != 0.0f && canChange)
 	{
-		if (IsKeyDown(KEY_RIGHT) && myDirection != left)
+		if (IsKeyDown(controls.right) && myDirection != left)
 		{
 			myDirection = right;
 		}
-		else if (IsKeyDown(KEY_DOWN) && myDirection != up)
+		else if (IsKeyDown(controls.down) && myDirection != up)
 		{
 			myDirection = down;
 		}
-		else if (IsKeyDown(KEY_LEFT) && myDirection != right)
+		else if (IsKeyDown(controls.left) && myDirection != right)
 		{
 			myDirection = left;
 		}
-		else if (IsKeyDown(KEY_UP) && myDirection != down)
+		else if (IsKeyDown(controls.up) && myDirection != down)
 		{
 			myDirection = up;
 		}
@@ -114,6 +114,9 @@ void Player::SetPositionAndDirection(Vector2 pos, Direction dir)
 	myDirection = dir;
 	body[head] = new Object(pos.x + (distanceToMove / 4), pos.y + (distanceToMove / 4),
 		distanceToMove / 2, distanceToMove / 2, myColor);
+	originPosition.x = body[head]->GetX();
+	originPosition.y = body[head]->GetY();
+	originDir = dir;
 	for (int i = 1; i < maxBody; i++)
 	{
 		if (myDirection == right)
@@ -137,6 +140,13 @@ void Player::SetPositionAndDirection(Vector2 pos, Direction dir)
 				distanceToMove / 2, distanceToMove / 2, myColor);
 		}
 	}
+}
+void Player::SetControls(KeyboardKey up, KeyboardKey down, KeyboardKey left, KeyboardKey right)
+{
+	controls.up = up;
+	controls.down = down;
+	controls.left = left;
+	controls.right = right;
 }
 void Player::SetNewMoveInBody()//asAS
 {

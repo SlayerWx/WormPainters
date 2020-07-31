@@ -5,6 +5,10 @@
 #include "objects/player/player.h"
 namespace worm_painters
 {
+	enum playerNumber
+	{
+		playerOne,playerTwo,playerTree,playerFour
+	};
 	class Gameplay
 	{
 	public:
@@ -18,7 +22,7 @@ namespace worm_painters
 		static const int maxPlayers = 4;
 		Player* p[maxPlayers];
 	private:
-		float timeGameplayScale = 0.5f;
+		float timeGameplayScale = 1.0f;
 		void CheckCollision();
 	};
 }
