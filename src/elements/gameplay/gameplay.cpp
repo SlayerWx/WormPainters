@@ -12,25 +12,33 @@ Gameplay::Gameplay()
 	for (int i = 0; i < maxPlayers; i++)
 	{
 		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, RED,playerHead,playerBody);
+		p[i]->SetActive(false);
 	}
-	p[playerOne]->SetControls(KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT);
+	if (!(playerOne >= mp))
+	{
+		p[playerOne]->SetControls(KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT);
+		p[playerOne]->SetActive(true);
+	}
 	if (!(playerTwo >= mp))
 	{
 		p[playerTwo]->SetColor(RED);
 		p[playerTwo]->SetControls(KEY_R, KEY_F, KEY_D, KEY_G);
 		p[playerTwo]->SetPositionAndDirection({ GetScreenWidth() - map->GetWidthHeightPlate().x,static_cast<float>(map->GetTop()) }, down);
+		p[playerTwo]->SetActive(true);
 	}
 	if (!(playerTree >= mp))
 	{
 		p[playerTree]->SetColor(YELLOW);
 		p[playerTree]->SetControls(KEY_U, KEY_J, KEY_H, KEY_K);
 		p[playerTree]->SetPositionAndDirection({ 0.0f,GetScreenHeight() - map->GetWidthHeightPlate().y }, up);
+		p[playerTree]->SetActive(true);
 	}
 	if(!(playerFour >= mp))
 	{ 
-	p[playerFour]->SetColor(VIOLET);
-	p[playerFour]->SetControls(KEY_C,KEY_SPACE,KEY_X,KEY_V);
-	p[playerFour]->SetPositionAndDirection({ GetScreenWidth() - map->GetWidthHeightPlate().x,GetScreenHeight() - map->GetWidthHeightPlate().y }, left);
+		p[playerFour]->SetColor(VIOLET);
+		p[playerFour]->SetControls(KEY_C,KEY_SPACE,KEY_X,KEY_V);
+		p[playerFour]->SetPositionAndDirection({ GetScreenWidth() - map->GetWidthHeightPlate().x,GetScreenHeight() - map->GetWidthHeightPlate().y }, left);
+		p[playerFour]->SetActive(true);
 	}
 }
 Gameplay::~Gameplay()
@@ -58,7 +66,7 @@ void Gameplay::Update()
 {
 	for (int i = 0; i < maxPlayers; i++)
 	{
-		p[i]->Update(timeGameplayScale);
+		p[i]->Update(timeGameplayScale,map->GetTop());
 	}
 	CheckCollision();
 }
@@ -74,7 +82,10 @@ void Gameplay::CheckCollision()
 {
 	for (int i = 0; i < maxPlayers; i++)
 	{
-		map->CheckCollision(p[i]->GetHead(), p[i]->GetColor());
+		if (p[i]->GetActive())
+		{
+			map->CheckCollision(p[i]->GetHead(), p[i]->GetColor());
+		}
 	}
 }
 }

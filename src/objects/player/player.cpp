@@ -6,6 +6,7 @@ float Player::timer = 0.0f;
 Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color,Texture2D tHead,Texture2D tBody )//asAS
 {
 	imActive = false;
+	imDead = false;
 	canChange = true;
 	myColor = color;
 	timer = 0.0f;
@@ -34,7 +35,7 @@ Player::~Player()
 }
 void Player::Input(float timeScale)//asAS
 {
-	if (timeScale != 0.0f && canChange)
+	if (timeScale != 0.0f && canChange && imActive && !imDead)
 	{
 		if (IsKeyDown(controls.right) && myDirection != left)
 		{
@@ -55,8 +56,10 @@ void Player::Input(float timeScale)//asAS
 		canChange = false;
 	}
 }
-void Player::Update(float TimeScale)
+void Player::Update(float TimeScale,int topMap)
 {
+	if (imActive && !imDead)
+	{
 		if (timer > timerMX)
 		{
 			for (int i = 0; i < maxBody; i++)
@@ -72,10 +75,16 @@ void Player::Update(float TimeScale)
 			body[i]->Update(timer);
 		}
 		timer += (GetFrameTime() * speed) * TimeScale;
+		if (topMap > body[head]->GetY() || body[head]->GetX() < 0.0f 
+		|| body[head]->GetY() > GetScreenHeight() || body[head]->GetX()> GetScreenWidth())
+		{
+			imDead = true;
+		}
+	}
 }
 void Player::Draw()
 {
-	for (int  i = 0; i < maxBody; i++)
+	for (int  i = 0; i < maxBody && imActive; i++)
 	{
 		body[i]->Draw();
 	}
@@ -113,6 +122,10 @@ void Player::SetActive(bool active)
 {
 	imActive = active;
 }
+bool Player::GetActive()
+{
+	return imActive;
+}
 void Player::SetColor(Color newColor)
 {
 	myColor = newColor;
@@ -124,8 +137,8 @@ void Player::SetColor(Color newColor)
 void Player::SetPositionAndDirection(Vector2 pos, Direction dir)
 {
 	myDirection = dir;
-	body[head]->Restart(pos.x + (distanceToMove / 4), pos.y + (distanceToMove / 4),
-		distanceToMove / 2, distanceToMove / 2);
+	body[head]->Restart(pos.x + (distanceToMove / correctorScaleXPosition), pos.y + (distanceToMove / correctorScaleXPosition),
+		distanceToMove / theHalf, distanceToMove / theHalf);
 	originPosition.x = body[head]->GetX();
 	originPosition.y = body[head]->GetY();
 	originDir = dir;
@@ -134,22 +147,22 @@ void Player::SetPositionAndDirection(Vector2 pos, Direction dir)
 		if (myDirection == right)
 		{
 			body[i]->Restart(body[i - 1]->GetX() - distanceToMove, body[i - 1]->GetY(),
-				distanceToMove / 2, distanceToMove / 2);
+				distanceToMove / theHalf, distanceToMove / theHalf);
 		}
 		else if (myDirection == down)
 		{
 			body[i]->Restart(body[i - 1]->GetX(), body[i - 1]->GetY() - distanceToMove,
-				distanceToMove / 2, distanceToMove / 2);
+				distanceToMove / theHalf, distanceToMove / theHalf);
 		}
 		else if (myDirection == left)
 		{
 			body[i]->Restart(body[i - 1]->GetX() + distanceToMove, body[i - 1]->GetY(),
-				distanceToMove / 2, distanceToMove / 2);
+				distanceToMove / theHalf, distanceToMove / theHalf);
 		}
 		else if (myDirection == up)
 		{
 			body[i]->Restart(body[i - 1]->GetX(), body[i - 1]->GetY() + distanceToMove,
-				distanceToMove / 2, distanceToMove / 2);
+				distanceToMove / theHalf, distanceToMove / theHalf);
 		}
 	}
 }
@@ -159,6 +172,14 @@ void Player::SetControls(KeyboardKey up, KeyboardKey down, KeyboardKey left, Key
 	controls.down = down;
 	controls.left = left;
 	controls.right = right;
+}
+void Player::SetDead(bool d)
+{
+	imDead = d;
+}
+bool Player::GetDead()
+{
+	return imDead;
 }
 void Player::SetNewMoveInBody()//asAS
 {
