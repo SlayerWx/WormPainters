@@ -1,9 +1,12 @@
 #include "worm_painters.h"
 
+#include <iostream>
+
 #include "raylib.h"
 
 #include "elements/gameplay/gameplay.h"
 #include "elements/menu/menu.h"
+using namespace std;
 namespace worm_painters
 {
 	WormPainters::WormPainters()
@@ -15,6 +18,7 @@ namespace worm_painters
 	}
 	WormPainters::~WormPainters()
 	{
+		if (menu) delete menu;
 		if (gameplay)delete gameplay;
 		CloseWindow();
 	}
@@ -29,6 +33,14 @@ namespace worm_painters
 	}
 	void WormPainters::Input()
 	{
+		if (menu->RequestPlay())
+		{
+			currentStage = Stage_Gameplay;
+		}
+		if (gameplay->GoToMenu())
+		{
+			currentStage = Stage_Menu;
+		}
 		switch (currentStage)
 		{
 		case Stage_SplashScreen:
@@ -72,5 +84,6 @@ namespace worm_painters
 			break;
 		}
 		EndDrawing();
+		
 	}
 }

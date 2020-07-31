@@ -1,4 +1,8 @@
 #include "player.h"
+
+#include "raylib.h"
+
+#include "objects/object.h"
 namespace worm_painters
 {
 const float Player::timerMX = 1.0f;

@@ -1,9 +1,15 @@
 #include "gameplay.h"
+
 #include "raylib.h"
+
+#include "elements/map/map.h"
+#include "objects/player/player.h"
 namespace worm_painters
 {
 Gameplay::Gameplay()
 {
+	timerToMenu = timerMxToMenu;
+	goToMenu = false;
 	timer = startTimeMinute;
 	endGame = false;
 	timeGameplayScale = defaultGamePlayScale;
@@ -63,7 +69,7 @@ void Gameplay::Restart()
 {
 	for (int i = 0; i < maxPlayers; i++)
 	{
-
+		p[i]->restart(true);
 	}
 }
 void Gameplay::Input()
@@ -71,6 +77,14 @@ void Gameplay::Input()
 	for (int i = 0; i < maxPlayers; i++)
 	{
 		p[i]->Input(timeGameplayScale);
+	}
+	if (IsKeyReleased(KEY_ENTER) && timeGameplayScale != 0.0f)
+	{
+		timeGameplayScale = 0.0f;
+	}
+	else if (IsKeyReleased(KEY_ENTER) && 0.0f == timeGameplayScale )
+	{
+		timeGameplayScale = defaultGamePlayScale;
 	}
 }
 void Gameplay::Update()
@@ -92,6 +106,18 @@ void Gameplay::Draw()
 	}
 	DrawHud();
 	DrawWinner();
+}
+bool worm_painters::Gameplay::GoToMenu()
+{
+	return goToMenu;
+}
+void Gameplay::RequestMenu()
+{
+	timerToMenu -= GetFrameTime();
+	if (timerToMenu < 0.0f)
+	{
+		goToMenu = true;
+	}
 }
 void Gameplay::CheckCollision()
 {
@@ -146,6 +172,11 @@ void Gameplay::WinCondition()
 			endGame = true;
 			
 		}
+		
+	}
+	if (endGame)
+	{
+		RequestMenu();
 	}
 }
 void Gameplay::DrawWinner()//asAS

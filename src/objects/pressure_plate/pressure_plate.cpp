@@ -1,7 +1,5 @@
 #include "pressure_plate.h"
 #include "raylib.h"
-#include <iostream>
-using namespace std;
 namespace worm_painters
 {
 PressurePlate::PressurePlate(int x,int y,int width,int height,Texture2D texture,Texture2D splash)

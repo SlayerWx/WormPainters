@@ -1,9 +1,12 @@
 #ifndef WORM_PAINTERS_H
 #define WORM_PAINTERS_H
 #include <iostream>
+
 #include "raylib.h"
+
 #include "elements/gameplay/gameplay.h"
 #include "elements/menu/menu.h"
+using namespace std;
 namespace worm_painters
 {
 using namespace std;
@@ -28,7 +31,6 @@ private:
 	void Input();
 	void Update();
 	void Draw();
-	void RequestExit();
 };
 }
 #endif

@@ -83,42 +83,45 @@ void Menu::Update()
 		exitColor = colorInSelection;
 		break;
 	}
-	if (choose == credits)
-	{
-		UpdateCredits();
-	}
+
 }
 
 void Menu::Draw()//asAS
 {
-	int rememberPos = GetScreenHeight() / 2 - fontSize;
+	int rememberPos = GetScreenHeight() / theHalf - fontSize;
 	DrawTexture(bckground,0,0,WHITE);
 
-	DrawText("Play", GetScreenWidth()/2 - sizeof("Play")- fontSize, rememberPos, fontSize, plyColor);
+	DrawText("Play", GetScreenWidth()/theHalf - sizeof("Play")- fontSize, rememberPos, fontSize, plyColor);
 	rememberPos += fontSize + distanceOptions;
-	DrawText("Credits", GetScreenWidth() / 2 - sizeof("Credits")- fontSize, rememberPos, fontSize, crditColor);
+	DrawText("Credits", GetScreenWidth() / theHalf - sizeof("Credits")- fontSize, rememberPos, fontSize, crditColor);
 	rememberPos += fontSize + distanceOptions;
-	DrawText("Exit", GetScreenWidth() / 2 - sizeof("Exit")- fontSize, rememberPos, fontSize, exitColor);
-	DrawText("controls Player 1: W,A,S,D           Controls Player 2:Arrows UP,LEFT,DOWN,RIGHT",
-		GetScreenWidth()/2 - (sizeof("controls Player 1: W,A,S,D           Controls Player 2:Arrows UP,LEFT,DOWN,RIGHT")/2)* 
-		(controlsSizeFont/2),GetScreenHeight() - controlsSizeFont,controlsSizeFont, BLACK);
+	DrawText("Exit", GetScreenWidth() / theHalf - sizeof("Exit")- fontSize, rememberPos, fontSize, exitColor);
+	DrawText("controls Player 1: Arrows UP,LEFT,DOWN,RIGHT           Controls Player 2:W,A,S,D",
+		GetScreenWidth()/theHalf - (sizeof("controls Player 1: W,A,S,D           Controls Player 2:Arrows UP,LEFT,DOWN,RIGHT")/theHalf)* 
+		(controlsSizeFont/theHalf),GetScreenHeight() - controlsSizeFont,controlsSizeFont, BLACK);
+	DrawText("Pause: P",GetScreenWidth()/theHalf - (sizeof("Pause: P")* controlsSizeFont/theHalf),GetScreenHeight() - 
+		controlsSizeFont * theHalf,controlsSizeFont,BLACK);
 	if (choose == credits)
 	{
 		DrawCredits();
 	}
 }
-void Menu::DrawCredits()
-{
-	int rememberPos = GetScreenHeight() / 4 - fontSize;
-	DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);	
-	DrawText("By:Maxi Ruffo", GetScreenWidth() / 2 - sizeof("By:Maxi Ruffo") - fontSize, rememberPos, fontSize, noSelection);
-	rememberPos += fontSize + distanceOptions;
-	DrawText("Programs : Gimp 2, Visual studio", GetScreenWidth() / 2 - sizeof("Programs: Gimp2, Visual studio") -
-		fontSize, rememberPos, fontSize, noSelection);
-	rememberPos += fontSize + distanceOptions;
-	DrawText("BACK", GetScreenWidth() / 2 - sizeof("BACK") - fontSize, rememberPos, fontSize, colorInSelection);
-}
 bool Menu::RequestExit()
 {
 	return (choose == exit);
+}
+bool Menu::RequestPlay()
+{
+	return (choose == play);
+}
+void Menu::DrawCredits()
+{
+	int rememberPos = GetScreenHeight() / theHalf - fontSize;
+	DrawTexture(bckground, 0, 0, WHITE);
+	DrawText("By:Maxi Ruffo", GetScreenWidth() / theHalf - sizeof("By:Maxi Ruffo") - fontSize, rememberPos, fontSize / theHalf, noSelection);
+	rememberPos += fontSize + distanceOptions;
+	DrawText("Programs : Gimp 2, Visual studio", GetScreenWidth() / four - sizeof("Programs: Gimp2, Visual studio") -
+		fontSize / 2, rememberPos, fontSize / theHalf, noSelection);
+	rememberPos += fontSize + distanceOptions;
+	DrawText("BACK", GetScreenWidth() / theHalf - sizeof("BACK") - fontSize, rememberPos, fontSize, colorInSelection);
 }

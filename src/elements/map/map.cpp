@@ -1,4 +1,8 @@
 #include "map.h"
+
+#include "raylib.h"
+
+#include "objects/pressure_plate/pressure_plate.h"
 namespace worm_painters
 {
 Map::Map()

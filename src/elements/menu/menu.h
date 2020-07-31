@@ -19,10 +19,10 @@ public:
 	void Input();
 	void Update();
 	void Draw();
-	void UpdateCredits();
-	void DrawCredits();
 	bool RequestExit();
+	bool RequestPlay();
 private:
+	void DrawCredits();
 	Choose choose;
 	Key myKey;
 	int currentOption;
@@ -35,6 +35,8 @@ private:
 	Color crditColor;
 	Color exitColor;
 	Texture2D bckground;
+	const int theHalf = 2;
+	const int four = 4;
 
 };
 #endif

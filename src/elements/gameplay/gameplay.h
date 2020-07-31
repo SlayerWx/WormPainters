@@ -1,10 +1,10 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
-#include <iostream>
+
 #include "raylib.h"
+
 #include "elements/map/map.h"
 #include "objects/player/player.h"
-using namespace std;
 namespace worm_painters
 {
 enum playerNumber
@@ -20,10 +20,12 @@ public:
 	void Input();
 	void Update();
 	void Draw();
+	bool GoToMenu();
 	Map* map;
 	static const int maxPlayers = 2;
 	Player* p[maxPlayers];
 private:
+	void RequestMenu();
 	float timeGameplayScale = 1.0f;
 	const float defaultGamePlayScale = 1.0f;
 	void CheckCollision();
@@ -50,6 +52,9 @@ private:
 	const Color playerFourColor = VIOLET;
 	int checkPlayerWin = 0;
 	bool endGame;
+	bool goToMenu;
+	float timerToMenu;
+	const float timerMxToMenu = 2.0f;
 };
 }
 #endif
