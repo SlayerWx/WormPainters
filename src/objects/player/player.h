@@ -51,6 +51,7 @@ private:
 	Key controls;
 	static const int correctorScaleXPosition = 4;
 	static const int theHalf = 2;
+	void CheckSelfCollision();
 };
 }
 #endif

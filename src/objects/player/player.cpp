@@ -80,6 +80,7 @@ void Player::Update(float TimeScale,int topMap)
 		{
 			imDead = true;
 		}
+		CheckSelfCollision();
 	}
 }
 void Player::Draw()
@@ -189,6 +190,16 @@ void Player::SetNewMoveInBody()//asAS
 	{
 		body[i]->SetNewPos(body[i-1]->GetX(),body[i-1]->GetY());
 		
+	}
+}
+void Player::CheckSelfCollision()
+{
+	for (int i = next; i < maxBody; i++)
+	{
+		if (CheckCollisionRecs(body[head]->GetBody(), body[i]->GetBody()))
+		{
+			imDead = true;
+		}
 	}
 }
 }
