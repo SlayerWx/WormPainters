@@ -5,6 +5,7 @@
 
 #include "elements/map/map.h"
 #include "objects/player/player.h"
+#include "objects/fruit/fruit.h"
 namespace worm_painters
 {
 enum playerNumber
@@ -24,6 +25,7 @@ public:
 	Map* map;
 	static const int maxPlayers = 2;
 	Player* p[maxPlayers];
+	Fruit* fruit;
 private:
 	void RequestMenu();
 	float timeGameplayScale = 1.0f;
@@ -55,6 +57,9 @@ private:
 	bool goToMenu;
 	float timerToMenu;
 	const float timerMxToMenu = 2.0f;
+	const int four = 4;
+	const int eight = 8;
+	int mxPlayersInGame;
 };
 }
 #endif

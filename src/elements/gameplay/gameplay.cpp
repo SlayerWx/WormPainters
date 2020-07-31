@@ -4,6 +4,7 @@
 
 #include "elements/map/map.h"
 #include "objects/player/player.h"
+#include "objects/fruit/fruit.h"
 namespace worm_painters
 {
 Gameplay::Gameplay()
@@ -21,10 +22,13 @@ Gameplay::Gameplay()
 	hud.width = GetScreenWidth();
 	hud.height = map->GetTop();
 	sizeFontWin = static_cast<int>(map->GetWidthHeightPlate().x * 2);
+	fruit = new Fruit(map->GetWidthHeightPlate().x,map->GetWidthHeightPlate().y);
+	fruit->RestartPosition(map->GetTop());
 	for (int i = 0; i < maxPlayers; i++)
 	{
 		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, playerOneColor,playerHead,playerBody);
 		p[i]->SetActive(false);
+		mxPlayersInGame++;
 	}
 	if (!(playerOne >= mp))
 	{
@@ -63,6 +67,7 @@ Gameplay::~Gameplay()
 		if (p[i]) delete p[i];
 	}
 	if(map)delete map;
+	if (fruit) delete fruit;
 	
 }
 void Gameplay::Restart()
@@ -105,6 +110,7 @@ void Gameplay::Draw()
 		p[i]->Draw();
 	}
 	DrawHud();
+	fruit->Draw();
 	DrawWinner();
 }
 bool worm_painters::Gameplay::GoToMenu()
@@ -136,6 +142,10 @@ void Gameplay::CheckCollision()
 					p[t]->SetDead(true);
 				}
 			}
+		}
+		if (CheckCollisionRecs(p[i]->GetHead(), fruit->GetBody()))
+		{
+			fruit->SetPointsInPlayer(p[i],map->GetTop());
 		}
 	}
 }
@@ -209,8 +219,24 @@ void Gameplay::Timing()
 		seconds = 0.0f;
 	}
 }
-void Gameplay::DrawTime()
+void Gameplay::DrawTime()//asAS
 {
+	if (mxPlayersInGame > playerOne)
+	{
+		DrawText(FormatText("%i", p[playerOne]->GetPoints()), hud.width / eight, hud.height / eight, timeSizeFont, WHITE);
+	}
+	if (mxPlayersInGame > playerTwo)
+	{
+		DrawText(FormatText("%i", p[playerTwo]->GetPoints()), hud.width - timeSizeFont * four, hud.height / eight, timeSizeFont, WHITE);
+	}
+	if (mxPlayersInGame > playerTree)
+	{
+		DrawText(FormatText("%i", p[playerTree]->GetPoints()), hud.width / eight, hud.height / theHalf +(timeSizeFont/theHalf) , timeSizeFont, WHITE);
+	}
+	if (mxPlayersInGame > playerFour)
+	{
+		DrawText(FormatText("%i", p[playerFour]->GetPoints()), hud.width - timeSizeFont * four, (hud.height / theHalf)+ (timeSizeFont/theHalf), timeSizeFont, WHITE);
+	}
 	if (seconds < decimal)
 	{
 		const char* w = FormatText("%i:0%i", timer, static_cast<int>(seconds));

@@ -143,6 +143,7 @@
     <ClCompile Include="..\src\elements\map\map.cpp" />
     <ClCompile Include="..\src\elements\menu\menu.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\objects\fruit\fruit.cpp" />
     <ClCompile Include="..\src\objects\object.cpp" />
     <ClCompile Include="..\src\objects\player\player.cpp" />
     <ClCompile Include="..\src\objects\pressure_plate\pressure_plate.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="..\src\elements\gameplay\gameplay.h" />
     <ClInclude Include="..\src\elements\map\map.h" />
     <ClInclude Include="..\src\elements\menu\menu.h" />
+    <ClInclude Include="..\src\objects\fruit\fruit.h" />
     <ClInclude Include="..\src\objects\object.h" />
     <ClInclude Include="..\src\objects\player\player.h" />
     <ClInclude Include="..\src\objects\pressure_plate\pressure_plate.h" />

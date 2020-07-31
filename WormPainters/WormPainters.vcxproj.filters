@@ -28,6 +28,9 @@
     <Filter Include="src\elements\menu">
       <UniqueIdentifier>{bf16fbba-a813-4a3a-8c72-bd432aa45dc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\objects\fruit">
+      <UniqueIdentifier>{8d1b400d-cb2e-4857-a61e-04e696cc40f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -54,6 +57,9 @@
     <ClCompile Include="..\src\elements\menu\menu.cpp">
       <Filter>src\elements\menu</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\objects\fruit\fruit.cpp">
+      <Filter>src\objects\fruit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\worm_painters\worm_painters.h">
@@ -76,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="..\src\elements\menu\menu.h">
       <Filter>src\elements\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\objects\fruit\fruit.h">
+      <Filter>src\objects\fruit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
