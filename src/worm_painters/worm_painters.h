@@ -37,6 +37,7 @@ private:
 	const float modfV = 0.1f;
 	const float mx = 1.0f;
 	const float min = 0.0f;
+	void Volume();
 };
 }
 #endif

@@ -101,7 +101,7 @@ void Menu::Draw()//asAS
 		GetScreenWidth()/theHalf - (sizeof("controls Player 1: W,A,S,D           Controls Player 2:Arrows UP,LEFT,DOWN,RIGHT")/theHalf)* 
 		(controlsSizeFont/theHalf),GetScreenHeight() - controlsSizeFont,controlsSizeFont, BLACK);
 
-	DrawText("F1 + Volume,F2 - Volume, Pause: P", GetScreenWidth() / theHalf - (sizeof("F1 + Volume,F2 - Volume, Pause: P")* controlsSizeFont / theHalf), GetScreenHeight() -
+	DrawText("F1 + Volume, F2 - Volume, Pause: P", GetScreenWidth() / theHalf - (sizeof("F1 + Volume,F2 - Volume, Pause: P")* controlsSizeFont / theHalf), GetScreenHeight() -
 		controlsSizeFont * theHalf, controlsSizeFont, BLACK);
 	if (choose == credits)
 	{
