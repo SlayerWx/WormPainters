@@ -9,14 +9,7 @@ namespace worm_painters
 {
 Gameplay::Gameplay()
 {
-	overDeadTime = false;
-	overDead = mxOverDead;
-	draw = true;
-	timerToMenu = timerMxToMenu;
-	goToMenu = false;
-	timer = startTimeMinute;
-	endGame = false;
-	timeGameplayScale = defaultGamePlayScale;
+	
 	playerBody = LoadTexture("assets/texture/worm/body.png");
 	playerHead = LoadTexture("assets/texture/worm/head.png");
 	hud = LoadTexture("assets/texture/ui/hud.png");
@@ -25,11 +18,10 @@ Gameplay::Gameplay()
 	hud.width = GetScreenWidth();
 	hud.height = map->GetTop();
 	sizeFontWin = static_cast<int>(map->GetWidthHeightPlate().x * 2);
-	fruit = new Fruit(map->GetWidthHeightPlate().x,map->GetWidthHeightPlate().y);
-	fruit->RestartPosition(map->GetTop());
+	fruit = new Fruit(map->GetWidthHeightPlate().x, map->GetWidthHeightPlate().y);
 	for (int i = 0; i < maxPlayers; i++)
 	{
-		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, playerOneColor,playerHead,playerBody);
+		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, playerOneColor, playerHead, playerBody);
 		p[i]->SetActive(false);
 		mxPlayersInGame++;
 	}
@@ -43,6 +35,7 @@ Gameplay::Gameplay()
 		p[playerTwo]->SetColor(playerTwoColor);
 		p[playerTwo]->SetControls(KEY_R, KEY_F, KEY_D, KEY_G);
 		p[playerTwo]->SetPositionAndDirection({ GetScreenWidth() - map->GetWidthHeightPlate().x,static_cast<float>(map->GetTop()) }, down);
+		p[playerTwo]->ChangeOrigin({ GetScreenWidth() - map->GetWidthHeightPlate().x,static_cast<float>(map->GetTop()) }, down);
 		p[playerTwo]->SetActive(true);
 	}
 	if (!(playerTree >= mp))
@@ -50,16 +43,19 @@ Gameplay::Gameplay()
 		p[playerTree]->SetColor(playerTreeColor);
 		p[playerTree]->SetControls(KEY_U, KEY_J, KEY_H, KEY_K);
 		p[playerTree]->SetPositionAndDirection({ 0.0f,GetScreenHeight() - map->GetWidthHeightPlate().y }, up);
+		p[playerTree]->ChangeOrigin({ 0.0f,GetScreenHeight() - map->GetWidthHeightPlate().y }, up);
 		p[playerTree]->SetActive(true);
 	}
-	if(!(playerFour >= mp))
-	{ 
+	if (!(playerFour >= mp))
+	{
 		p[playerFour]->SetColor(playerFourColor);
-		p[playerFour]->SetControls(KEY_C,KEY_SPACE,KEY_X,KEY_V);
+		p[playerFour]->SetControls(KEY_C, KEY_SPACE, KEY_X, KEY_V);
 		p[playerFour]->SetPositionAndDirection({ GetScreenWidth() - map->GetWidthHeightPlate().x,GetScreenHeight() - map->GetWidthHeightPlate().y }, left);
+		p[playerFour]->ChangeOrigin({ GetScreenWidth() - map->GetWidthHeightPlate().x,GetScreenHeight() - map->GetWidthHeightPlate().y }, left);
 		p[playerFour]->SetActive(true);
 	}
 }
+
 Gameplay::~Gameplay()
 {
 	UnloadTexture(hud);
@@ -72,13 +68,6 @@ Gameplay::~Gameplay()
 	if(map)delete map;
 	if (fruit) delete fruit;
 	
-}
-void Gameplay::Restart()
-{
-	for (int i = 0; i < maxPlayers; i++)
-	{
-		p[i]->restart(true);
-	}
 }
 void Gameplay::Input()
 {
@@ -116,9 +105,27 @@ void Gameplay::Draw()
 	fruit->Draw();
 	DrawWinner();
 }
-bool worm_painters::Gameplay::GoToMenu()
+bool Gameplay::GoToMenu()
 {
 	return goToMenu;
+}
+void Gameplay::myRestart()
+{
+	
+	overDeadTime = false;
+	overDead = mxOverDead;
+	draw = true;
+	timerToMenu = timerMxToMenu;
+	goToMenu = false;
+	timer = startTimeMinute;
+	endGame = false;
+	timeGameplayScale = defaultGamePlayScale;
+	map->Reset();
+	for (int i = 0; i < maxPlayers; i++)
+	{
+		p[i]->restart(true);
+	}
+	fruit->RestartPosition(map->GetTop());
 }
 void Gameplay::RequestMenu()
 {
@@ -159,6 +166,7 @@ void Gameplay::DrawHud()
 {
 	DrawTexture(hud, 0, 0, WHITE);
 	DrawTime();
+
 }
 void Gameplay::WinCondition()
 {
@@ -207,6 +215,13 @@ void Gameplay::WinCondition()
 					{
 						checkPlayerWin = i;
 					}
+				}
+				int rememberPoint = 0;
+				for (int i = 0; i < maxPlayers; i++)
+				{
+					if (p[i]->GetPoints() > rememberPoint)
+						checkPlayerWin = i;
+					rememberPoint = p[i]->GetPoints();
 				}
 			}
 		}

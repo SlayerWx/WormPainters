@@ -12,7 +12,7 @@ class Object
 public:
 	Object(float width, float height, Color color, Texture2D texture);
 	~Object();
-	void Restart(float x, float y, float width, float height);
+	void myRestart(float x, float y, float width, float height);
 	void SetX(float newX);
 	float GetX();
 	void SetY(float newY);

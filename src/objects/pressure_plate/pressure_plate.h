@@ -17,6 +17,7 @@ public:
 private:
 	Rectangle body;
 	Color myColor = WHITE;
+	const Color originColor = WHITE;
 	Texture2D mytexture;
 	bool isSplashed = false;
 	Texture2D mySplashTexture;

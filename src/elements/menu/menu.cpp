@@ -114,6 +114,10 @@ bool Menu::RequestPlay()
 {
 	return (choose == play);
 }
+void Menu::myRestart()
+{
+	choose = nothing;
+}
 void Menu::DrawCredits()
 {
 	int rememberPos = GetScreenHeight() / theHalf - fontSize;

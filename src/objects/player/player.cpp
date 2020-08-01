@@ -43,12 +43,29 @@ Player::~Player()
 }
 void Player::restart(bool ctive)
 {
+	SetPositionAndDirection(originPosition, originDir);
+	bodyActived = 0;
 	myPoints = 0;
 	timer = 0.0f;
 	imActive = ctive;
 	imDead = false;
 	canChange = true;
-	SetPositionAndDirection(originPosition, originDir);
+	for (int i = 0; i < maxBody; i++)
+	{
+		if (i == head)
+		{
+			body[i]->SetActive(true);
+		}
+		else
+		{
+			body[i]->SetActive(false);
+			if (i == next)
+			{
+				body[i]->SetActive(true);
+
+			}
+		}
+	}
 }
 void Player::Input(float timeScale)//asAS
 {
@@ -155,29 +172,29 @@ void Player::SetColor(Color newColor)
 void Player::SetPositionAndDirection(Vector2 pos, Direction dir)
 {
 	myDirection = dir;
-	body[head]->Restart(pos.x + (distanceToMove / correctorScaleXPosition), pos.y + (distanceToMove / correctorScaleXPosition),
+	body[head]->myRestart(pos.x + (distanceToMove / correctorScaleXPosition), pos.y + (distanceToMove / correctorScaleXPosition),
 		distanceToMove / theHalf, distanceToMove / theHalf);
 	originDir = dir;
 	for (int i = 1; i < maxBody; i++)
 	{
 		if (myDirection == right)
 		{
-			body[i]->Restart(body[i - 1]->GetX() - distanceToMove, body[i - 1]->GetY(),
+			body[i]->myRestart(body[i - 1]->GetX() - distanceToMove, body[i - 1]->GetY(),
 				distanceToMove / theHalf, distanceToMove / theHalf);
 		}
 		else if (myDirection == down)
 		{
-			body[i]->Restart(body[i - 1]->GetX(), body[i - 1]->GetY() - distanceToMove,
+			body[i]->myRestart(body[i - 1]->GetX(), body[i - 1]->GetY() - distanceToMove,
 				distanceToMove / theHalf, distanceToMove / theHalf);
 		}
 		else if (myDirection == left)
 		{
-			body[i]->Restart(body[i - 1]->GetX() + distanceToMove, body[i - 1]->GetY(),
+			body[i]->myRestart(body[i - 1]->GetX() + distanceToMove, body[i - 1]->GetY(),
 				distanceToMove / theHalf, distanceToMove / theHalf);
 		}
 		else if (myDirection == up)
 		{
-			body[i]->Restart(body[i - 1]->GetX(), body[i - 1]->GetY() + distanceToMove,
+			body[i]->myRestart(body[i - 1]->GetX(), body[i - 1]->GetY() + distanceToMove,
 				distanceToMove / theHalf, distanceToMove / theHalf);
 		}
 	}
@@ -227,6 +244,13 @@ bool Player::CheckEnemyCollision(Rectangle eHead)
 		}
 	}
 	return false;
+}
+
+void Player::ChangeOrigin(Vector2 pos, Direction dir)
+{
+
+	originDir = dir;
+	originPosition = pos;
 }
 
 void Player::SetNewMoveInBody()//asAS

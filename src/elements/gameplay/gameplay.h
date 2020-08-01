@@ -17,11 +17,11 @@ class Gameplay
 public:
 	Gameplay();
 	~Gameplay();
-	void Restart();
 	void Input();
 	void Update();
 	void Draw();
 	bool GoToMenu();
+	void myRestart();
 	Map* map;
 	static const int maxPlayers = 2;
 	Player* p[maxPlayers];

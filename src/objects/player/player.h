@@ -38,6 +38,7 @@ public:
 	void SetDead(bool d);
 	bool GetDead();
 	bool CheckEnemyCollision(Rectangle eHead);
+	void ChangeOrigin(Vector2 pos,Direction dir);
 private:
 	static const int maxBody = 25;
 	Object* body[maxBody];

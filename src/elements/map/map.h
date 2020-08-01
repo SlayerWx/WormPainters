@@ -14,6 +14,7 @@ public:
 	bool CheckCollision(Rectangle player,Color playerColor);
 	int GetTop();
 	int GetValor();
+	void Reset();
 private:
 	static const int top = 100;
 	static const int rowPlatesMax = 20;

@@ -21,6 +21,7 @@ public:
 	void Draw();
 	bool RequestExit();
 	bool RequestPlay();
+	void myRestart();
 private:
 	void DrawCredits();
 	Choose choose;

@@ -14,8 +14,8 @@ Map::Map()
 		for (int t = 0; t < columnPlatesMax; t++)
 		{
 			plates[i][t] = new PressurePlate(t * (GetScreenWidth() / columnPlatesMax),
-				(i * (GetScreenHeight()-top)/rowPlatesMax)+top, GetScreenWidth() / columnPlatesMax,
-				(GetScreenHeight() - top) / rowPlatesMax, platesBakground,platesSplash);
+				(i * (GetScreenHeight() - top) / rowPlatesMax) + top, GetScreenWidth() / columnPlatesMax,
+				(GetScreenHeight() - top) / rowPlatesMax, platesBakground, platesSplash);
 		}
 	}
 }
@@ -46,16 +46,16 @@ void Map::draw()//asAS
 		}
 	}
 }
-bool Map::CheckCollision(Rectangle player,Color playerColor)//asAS
+bool Map::CheckCollision(Rectangle player, Color playerColor)//asAS
 {
 	for (int i = 0; i < rowPlatesMax; i++)
 	{
 		for (int t = 0; t < columnPlatesMax; t++)
 		{
 			if (CheckCollisionRecs(player, plates[i][t]->GetBody()) &&
-				(playerColor.a != plates[i][t]->GetColor().a||
-				playerColor.b != plates[i][t]->GetColor().b||
-				playerColor.g != plates[i][t]->GetColor().g))
+				(playerColor.a != plates[i][t]->GetColor().a ||
+					playerColor.b != plates[i][t]->GetColor().b ||
+					playerColor.g != plates[i][t]->GetColor().g))
 			{
 				plates[i][t]->SetColor(playerColor);
 				plates[i][t]->SetSplashed(true);
@@ -72,5 +72,15 @@ int Map::GetTop()
 int Map::GetValor()
 {
 	return plateValor;
+}
+void Map::Reset()
+{
+	for (int i = 0; i < rowPlatesMax; i++)
+	{
+		for (int t = 0; t < columnPlatesMax; t++)
+		{
+			plates[i][t]->SetSplashed(false);
+		}
+	}
 }
 }

@@ -31,6 +31,7 @@ private:
 	void Input();
 	void Update();
 	void Draw();
+	bool firstTime;
 };
 }
 #endif

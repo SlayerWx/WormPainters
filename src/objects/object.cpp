@@ -13,7 +13,7 @@ Object::Object(float width, float height,Color color,Texture2D texture)
 Object::~Object()
 {
 }
-void Object::Restart(float x,float y, float width, float height)
+void Object::myRestart(float x,float y, float width, float height)
 {
 	body.x = x;
 	body.y = y;

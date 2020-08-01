@@ -15,6 +15,7 @@ namespace worm_painters
 		currentStage = Stage_Menu;
 		gameplay = new Gameplay();
 		menu = new Menu();
+		firstTime = true;
 	}
 	WormPainters::~WormPainters()
 	{
@@ -33,13 +34,17 @@ namespace worm_painters
 	}
 	void WormPainters::Input()
 	{
-		if (menu->RequestPlay())
+		if (menu->RequestPlay() && firstTime)
 		{
 			currentStage = Stage_Gameplay;
+			menu->myRestart();
+			gameplay->myRestart();
+			firstTime = false;
 		}
 		if (gameplay->GoToMenu())
 		{
 			currentStage = Stage_Menu;
+			firstTime = true;
 		}
 		switch (currentStage)
 		{
