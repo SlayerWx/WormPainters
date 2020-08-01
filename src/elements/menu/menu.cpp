@@ -96,11 +96,13 @@ void Menu::Draw()//asAS
 	DrawText("Credits", GetScreenWidth() / theHalf - sizeof("Credits")- fontSize, rememberPos, fontSize, crditColor);
 	rememberPos += fontSize + distanceOptions;
 	DrawText("Exit", GetScreenWidth() / theHalf - sizeof("Exit")- fontSize, rememberPos, fontSize, exitColor);
+
 	DrawText("controls Player 1: Arrows UP,LEFT,DOWN,RIGHT           Controls Player 2:W,A,S,D",
 		GetScreenWidth()/theHalf - (sizeof("controls Player 1: W,A,S,D           Controls Player 2:Arrows UP,LEFT,DOWN,RIGHT")/theHalf)* 
 		(controlsSizeFont/theHalf),GetScreenHeight() - controlsSizeFont,controlsSizeFont, BLACK);
-	DrawText("Pause: P",GetScreenWidth()/theHalf - (sizeof("Pause: P")* controlsSizeFont/theHalf),GetScreenHeight() - 
-		controlsSizeFont * theHalf,controlsSizeFont,BLACK);
+
+	DrawText("F1 + Volume,F2 - Volume, Pause: P", GetScreenWidth() / theHalf - (sizeof("F1 + Volume,F2 - Volume, Pause: P")* controlsSizeFont / theHalf), GetScreenHeight() -
+		controlsSizeFont * theHalf, controlsSizeFont, BLACK);
 	if (choose == credits)
 	{
 		DrawCredits();

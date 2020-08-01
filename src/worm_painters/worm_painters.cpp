@@ -42,7 +42,7 @@ namespace worm_painters
 	}
 	void WormPainters::Input()//asAS
 	{
-		if (IsKeyReleased(KEY_L))
+		if (IsKeyReleased(KEY_F1))
 		{
 			volume += modfV;
 			if (volume > mx)
@@ -51,7 +51,7 @@ namespace worm_painters
 			}
 			SetMasterVolume(volume);
 		}
-		if (IsKeyReleased(KEY_O))
+		if (IsKeyReleased(KEY_F2))
 		{
 			volume -= modfV;
 			if (volume < min) {
