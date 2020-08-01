@@ -32,6 +32,11 @@ private:
 	void Update();
 	void Draw();
 	bool firstTime;
+	Music stream;
+	float volume = 0.5f;
+	const float modfV = 0.1f;
+	const float mx = 1.0f;
+	const float min = 0.0f;
 };
 }
 #endif

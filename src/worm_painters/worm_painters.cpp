@@ -12,15 +12,23 @@ namespace worm_painters
 	WormPainters::WormPainters()
 	{
 		InitWindow(initialWindowsSizeWidth, initialWindowSizeHeight, (title + ' ' + version).c_str());
+		InitAudioDevice();
+		stream = LoadMusicStream("assets/sound/music.ogg");
 		currentStage = Stage_Menu;
 		gameplay = new Gameplay();
 		menu = new Menu();
 		firstTime = true;
+		PlayMusicStream(stream);
+		SetMasterVolume(volume);
+		
 	}
 	WormPainters::~WormPainters()
 	{
 		if (menu) delete menu;
 		if (gameplay)delete gameplay;
+		StopMusicStream(stream);
+		UnloadMusicStream(stream);
+		CloseAudioDevice();
 		CloseWindow();
 	}
 	void WormPainters::Play()
@@ -32,8 +40,25 @@ namespace worm_painters
 			Draw();
 		}
 	}
-	void WormPainters::Input()
+	void WormPainters::Input()//asAS
 	{
+		if (IsKeyReleased(KEY_L))
+		{
+			volume += modfV;
+			if (volume > mx)
+			{
+				volume = mx;
+			}
+			SetMasterVolume(volume);
+		}
+		if (IsKeyReleased(KEY_O))
+		{
+			volume -= modfV;
+			if (volume < min) {
+				volume = min;
+			}
+			SetMasterVolume(volume);
+		}
 		if (menu->RequestPlay() && firstTime)
 		{
 			currentStage = Stage_Gameplay;
@@ -60,6 +85,7 @@ namespace worm_painters
 	}
 	void WormPainters::Update()
 	{
+		UpdateMusicStream(stream);
 		switch (currentStage)
 		{
 		case Stage_SplashScreen:
