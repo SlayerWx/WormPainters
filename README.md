@@ -14,7 +14,8 @@ Raylib
 Gimp 2
 
 Visual studio
-
+https://patrickdearteaga.com/es/musica-libre-derechos-gratis/solve-the-puzzle/ 
+https://www.freeaudiolibrary.com/es/efectos-gratuitos/?p=4
 
 ## Versiones
 https://github.com/SlayerWx/WormPainters/tree/v0.1
