@@ -9,6 +9,7 @@ namespace worm_painters
 {
 Gameplay::Gameplay()
 {
+	pDead = LoadSound("assets/sound/pdead.wav");
 	playerBody = LoadTexture("assets/texture/worm/body.png");
 	playerHead = LoadTexture("assets/texture/worm/head.png");
 	hud = LoadTexture("assets/texture/ui/hud.png");
@@ -20,7 +21,7 @@ Gameplay::Gameplay()
 	fruit = new Fruit(map->GetWidthHeightPlate().x, map->GetWidthHeightPlate().y);
 	for (int i = 0; i < maxPlayers; i++)
 	{
-		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, playerOneColor, playerHead, playerBody);
+		p[i] = new Player(right, map->GetWidthHeightPlate().x, { 0.0f,static_cast<float>(map->GetTop()) }, playerOneColor, playerHead, playerBody,pDead);
 		p[i]->SetActive(false);
 		mxPlayersInGame++;
 	}
@@ -57,6 +58,7 @@ Gameplay::Gameplay()
 
 Gameplay::~Gameplay()
 {
+	UnloadSound(pDead);
 	UnloadTexture(hud);
 	UnloadTexture(playerHead);
 	UnloadTexture(playerBody);

@@ -19,7 +19,7 @@ struct Key
 class Player
 {
 public:
-	Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color,Texture2D tHead,Texture2D tBody);
+	Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color,Texture2D tHead,Texture2D tBody, Sound mydnew);
 	~Player();
 	void restart(bool ctive);
 	void Input(float timeScale);
@@ -61,6 +61,8 @@ private:
 	int myPoints = 0;
 	void CheckSelfCollision();
 	const int goal = 100;
+	bool firstDead = false;
+	Sound myd;
 };
 }
 #endif

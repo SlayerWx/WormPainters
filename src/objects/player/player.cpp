@@ -6,8 +6,9 @@
 namespace worm_painters
 {
 const float Player::timerMX = 1.0f;
-Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color,Texture2D tHead,Texture2D tBody )//asAS
+Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Color color,Texture2D tHead,Texture2D tBody, Sound mydnew)//asAS
 {
+	myd = mydnew;
 	bodyActived = 0;
 	myColor = color;
 	distanceToMove = newDistanceToMove;
@@ -50,6 +51,7 @@ void Player::restart(bool ctive)
 	imActive = ctive;
 	imDead = false;
 	canChange = true;
+	firstDead = false;
 	for (int i = 0; i < maxBody; i++)
 	{
 		if (i == head)
@@ -112,7 +114,7 @@ void Player::Update(float TimeScale,int topMap)
 		if (topMap > body[head]->GetY() || body[head]->GetX() < 0.0f 
 		|| body[head]->GetY() > GetScreenHeight() || body[head]->GetX()> GetScreenWidth())
 		{
-			imDead = true;
+			SetDead(true);
 		}
 		CheckSelfCollision();
 	}
@@ -228,6 +230,12 @@ void Player::SetControls(KeyboardKey up, KeyboardKey down, KeyboardKey left, Key
 }
 void Player::SetDead(bool d)
 {
+	if (d && !firstDead)
+	{
+		firstDead = true;
+		PlaySound(myd);
+
+	}
 	imDead = d;
 }
 bool Player::GetDead()
@@ -269,7 +277,7 @@ void Player::CheckSelfCollision()
 	{
 		if (CheckCollisionRecs(body[head]->GetBody(), body[i]->GetBody()) && body[i]->GetActive())
 		{
-			imDead = true;
+			SetDead(true);
 		}
 	}
 }

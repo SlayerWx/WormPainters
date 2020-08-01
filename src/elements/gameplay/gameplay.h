@@ -64,6 +64,7 @@ private:
 	bool overDeadTime;
 	float overDead;
 	const float mxOverDead = 5.0f;
+	Sound pDead;
 };
 }
 #endif
