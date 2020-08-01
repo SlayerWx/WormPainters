@@ -30,7 +30,7 @@ Gameplay::Gameplay()
 		p[playerOne]->SetControls(KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT);
 		p[playerOne]->SetActive(true);
 	}
-	if (!(playerTwo >= mp))
+	if (!(playerTwo >= mp)) 
 	{
 		p[playerTwo]->SetColor(playerTwoColor);
 		p[playerTwo]->SetControls(KEY_W, KEY_S, KEY_A, KEY_D);
