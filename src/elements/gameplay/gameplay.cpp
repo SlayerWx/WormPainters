@@ -33,7 +33,7 @@ Gameplay::Gameplay()
 	if (!(playerTwo >= mp))
 	{
 		p[playerTwo]->SetColor(playerTwoColor);
-		p[playerTwo]->SetControls(KEY_R, KEY_F, KEY_D, KEY_G);
+		p[playerTwo]->SetControls(KEY_W, KEY_S, KEY_A, KEY_D);
 		p[playerTwo]->SetPositionAndDirection({ GetScreenWidth() - map->GetWidthHeightPlate().x,static_cast<float>(map->GetTop()) }, down);
 		p[playerTwo]->ChangeOrigin({ GetScreenWidth() - map->GetWidthHeightPlate().x,static_cast<float>(map->GetTop()) }, down);
 		p[playerTwo]->SetActive(true);
