@@ -129,5 +129,14 @@ void Menu::DrawCredits()
 	DrawText("Programs : Gimp 2, Visual studio", GetScreenWidth() / four - sizeof("Programs: Gimp2, Visual studio") -
 		fontSize / 2, rememberPos, fontSize / theHalf, noSelection);
 	rememberPos += fontSize + distanceOptions;
+	DrawText("Music Website:", GetScreenWidth() / four - sizeof("Music Website:") -
+		fontSize / 2, rememberPos, fontSize / theHalf, noSelection);
+	rememberPos += fontSize + distanceOptions/theHalf;
+	DrawText("    patrickdearteaga.com", GetScreenWidth() / four - sizeof("    patrickdearteaga.com") -
+		fontSize / 2, rememberPos, fontSize / theHalf, noSelection);
+	rememberPos += fontSize + distanceOptions/theHalf;
+	DrawText("    freeaudiolibrary.com", GetScreenWidth() / four - sizeof("    freeaudiolibrary.com") -
+		fontSize / 2, rememberPos, fontSize / theHalf, noSelection);
+	rememberPos += fontSize + distanceOptions;
 	DrawText("BACK", GetScreenWidth() / theHalf - sizeof("BACK") - fontSize, rememberPos, fontSize, colorInSelection);
 }

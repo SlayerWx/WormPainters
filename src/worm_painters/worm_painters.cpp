@@ -42,23 +42,7 @@ namespace worm_painters
 	}
 	void WormPainters::Input()//asAS
 	{
-		if (IsKeyReleased(KEY_F1))
-		{
-			volume += modfV;
-			if (volume > mx)
-			{
-				volume = mx;
-			}
-			SetMasterVolume(volume);
-		}
-		if (IsKeyReleased(KEY_F2))
-		{
-			volume -= modfV;
-			if (volume < min) {
-				volume = min;
-			}
-			SetMasterVolume(volume);
-		}
+		SetVolume();
 		if (menu->RequestPlay() && firstTime)
 		{
 			currentStage = Stage_Gameplay;
@@ -116,5 +100,25 @@ namespace worm_painters
 		}
 		EndDrawing();
 		
+	}
+	void WormPainters::SetVolume()
+	{
+		if (IsKeyReleased(KEY_F1))
+		{
+			volume += modfV;
+			if (volume > mx)
+			{
+				volume = mx;
+			}
+			SetMasterVolume(volume);
+		}
+		if (IsKeyReleased(KEY_F2))
+		{
+			volume -= modfV;
+			if (volume < min) {
+				volume = min;
+			}
+			SetMasterVolume(volume);
+		}
 	}
 }
