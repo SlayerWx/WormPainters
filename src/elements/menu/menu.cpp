@@ -137,6 +137,9 @@ void Menu::DrawCredits()
 	rememberPos += fontSize + distanceOptions/theHalf;
 	DrawText("    freeaudiolibrary.com", GetScreenWidth() / four - sizeof("    freeaudiolibrary.com") -
 		fontSize / 2, rememberPos, fontSize / theHalf, noSelection);
+	rememberPos += fontSize + distanceOptions / theHalf;
+	DrawText("Lib: Raylib", GetScreenWidth() / four - sizeof("Lib: Raylib") -
+		fontSize / 2, rememberPos, fontSize / theHalf, noSelection);
 	rememberPos += fontSize + distanceOptions;
 	DrawText("BACK", GetScreenWidth() / theHalf - sizeof("BACK") - fontSize, rememberPos, fontSize, colorInSelection);
 }
