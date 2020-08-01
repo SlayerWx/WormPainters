@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include "raylib.h"
 
-#include "objects/object.h"
+#include "objects/worm/worm.h"
 namespace worm_painters
 {
 enum Direction
@@ -41,7 +41,7 @@ public:
 	void ChangeOrigin(Vector2 pos,Direction dir);
 private:
 	static const int maxBody = 25;
-	Object* body[maxBody];
+	Worm* body[maxBody];
 	int bodyActived = 0;
 	Direction myDirection;
 	float distanceToMove;

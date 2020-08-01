@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 
-#include "objects/object.h"
+#include "objects/worm/worm.h"
 namespace worm_painters
 {
 const float Player::timerMX = 1.0f;
@@ -17,12 +17,12 @@ Player::Player(Direction start,float newDistanceToMove,Vector2 startPosition,Col
 	{
 		if (i == head)
 		{
-			body[i] = new Object(newDistanceToMove, newDistanceToMove, color,tHead);
+			body[i] = new Worm(newDistanceToMove, newDistanceToMove, color,tHead);
 			body[i]->SetActive(true);
 		}
 		else
 		{
-			body[i] = new Object(newDistanceToMove, newDistanceToMove, color, tBody);
+			body[i] = new Worm(newDistanceToMove, newDistanceToMove, color, tBody);
 			body[i]->SetActive(false);
 			if (i == next)
 			{

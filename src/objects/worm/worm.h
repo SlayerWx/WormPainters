@@ -7,11 +7,11 @@ enum BodyPart
 {
 	head = 0,next
 };
-class Object
+class Worm
 {
 public:
-	Object(float width, float height, Color color, Texture2D texture);
-	~Object();
+	Worm(float width, float height, Color color, Texture2D texture);
+	~Worm();
 	void myRestart(float x, float y, float width, float height);
 	void SetX(float newX);
 	float GetX();

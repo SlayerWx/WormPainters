@@ -9,7 +9,6 @@ namespace worm_painters
 {
 Gameplay::Gameplay()
 {
-	
 	playerBody = LoadTexture("assets/texture/worm/body.png");
 	playerHead = LoadTexture("assets/texture/worm/head.png");
 	hud = LoadTexture("assets/texture/ui/hud.png");
@@ -231,20 +230,18 @@ void Gameplay::WinCondition()
 		RequestMenu();
 	}
 }
-void Gameplay::DrawWinner()//asAS
+void Gameplay::DrawWinner()//
 {
 	if (endGame)
 	{
 		if (draw)
 		{
 			const char* w = FormatText("Draw!", (checkPlayerWin + 1));
-
 			DrawText(w, (GetScreenWidth() / theHalf) - (sizeof(w) * sizeFontWin/2), GetScreenHeight() / theHalf, sizeFontWin, winColor);
 		}
 		else if (!draw)
 		{
 			const char* w = FormatText("Winner Player %i", (checkPlayerWin + 1));
-
 			DrawText(w, (GetScreenWidth() / theHalf) - (sizeof(w) * sizeFontWin), GetScreenHeight() / theHalf, sizeFontWin, winColor);
 		}
 	}
